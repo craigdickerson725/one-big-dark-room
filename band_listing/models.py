@@ -14,3 +14,11 @@ class BandListing(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     snippet = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
+    band_listing = models.ForeignKey(BandListing, related_name='messages', on_delete=models.CASCADE)
+    message_body = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
