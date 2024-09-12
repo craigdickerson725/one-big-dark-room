@@ -12,3 +12,5 @@ class BandListing(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_listings")
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    snippet = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)

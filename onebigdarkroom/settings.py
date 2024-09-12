@@ -29,7 +29,7 @@ SECRET_KEY = 'Sk3l3tonk1ng'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-craigdicker-onebigdarkr-oeiin9roi9o.ws.codeinstitute-ide.net','.herokuapp.com']
 
