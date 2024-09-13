@@ -7,7 +7,8 @@ from .models import BandListing
 # def my_band_listing(request):
 #     return HttpResponse("Hello, Dark Room!")
 class BandListingList(generic.ListView):
-    model = BandListing
+    # model = BandListing
+    queryset = BandListing.objects.filter(status=1)
     template_name = 'band_listing/bandlisting_list.html'
 
     def get_context_data(self, **kwargs):
