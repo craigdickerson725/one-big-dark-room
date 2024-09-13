@@ -36,5 +36,6 @@ class Message(models.Model):
         ordering = ['-timestamp']
     
     def __str__(self):
-        # Return a snippet (first 50 characters) of the message body
-        return self.message_body[:50] + '...' if len(self.message_body) > 50 else self.message_body
+        # Format: 'Message from sender to recipient: [snippet of message body]'
+        snippet = self.message_body[:50] + '...' if len(self.message_body) > 50 else self.message_body
+        return f"Message from {self.sender.username} to {self.recipient.username}: {snippet}"
