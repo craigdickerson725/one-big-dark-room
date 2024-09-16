@@ -1,0 +1,141 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0a;
+    color: #cccccc;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'UnifrakturMaguntia', serif;
+    color: #f5f5f5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #cccccc;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #8b0000;
+}
+
+/* Container */
+.container {
+    padding: 15px;
+    max-width: 100%;
+    background-color: #0a0a0a;
+    margin: 0 auto;
+}
+
+/* Mobile-First Layout */
+@media (min-width: 768px) {
+    .container {
+        padding: 30px;
+        max-width: 1200px;
+    }
+}
+
+/* Buttons */
+button {
+    background-color: #1f1f1f;
+    color: #f5f5f5;
+    border: 2px solid #8b0000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #8b0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+/* Card / Listing */
+.card {
+    background-color: #1b1b1b;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    border-radius: 5px;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+}
+
+img:hover {
+    filter: grayscale(0%);
+}
+
+/* Horizontal Rules */
+hr {
+    border: none;
+    border-top: 1px dashed #666;
+    margin: 20px 0;
+}
+
+/* Footer */
+footer {
+    background-color: #111;
+    color: #888;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Cinzel Decorative', serif;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #f5f5f5;
+}
+
+footer a:hover {
+    color: #8b0000;
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 768px) {
+    footer {
+        padding: 30px;
+    }
+}
+
+/* Animations for Hover Effects */
+a {
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #8b0000;
+}
+
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #8b0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
