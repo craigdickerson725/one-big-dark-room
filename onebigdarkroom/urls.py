@@ -20,6 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
-    path("", include("band_listing.urls"), name='band_listing-urls'),
+    path('summernote/', include('django_summernote.urls')),  # Summernote for rich text editing
+    path('', include('band_listing.urls')),  # Include the band_listing URLs
 ]

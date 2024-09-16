@@ -7,7 +7,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class BandListing(models.Model):
     band_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    photo = models.ImageField(upload_to='band_photos/', blank=True, null=True)
+    photo = models.ImageField(upload_to='band_photos/', default='default-image.jpg')
     description = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_listings")
     created_at = models.DateTimeField(auto_now_add=True)
