@@ -24,3 +24,4 @@ class CreateListingView(CreateView):
 class BandListingDetail(generic.DetailView):
     model = BandListing
     template_name = 'band_listing/bandlisting_detail.html'
+    slug_field = 'slug'  # Ensure that it's looking up by slug
