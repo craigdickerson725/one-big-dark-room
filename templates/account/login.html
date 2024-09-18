@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">{% trans "Login" %}</h2>
+    <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-crimson">{% trans "Login" %}</button>
+        </div>
+    </form>
+
+    <p class="text-center mt-4">
+        <a href="{% url 'account_reset_password' %}">{% trans "Forgot your password?" %}</a>
+        <br>
+        <a href="{% url 'account_signup' %}">{% trans "Don't have an account? Sign up" %}</a>
+    </p>
+</div>
+{% endblock %}
