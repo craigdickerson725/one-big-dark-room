@@ -1,0 +1,92 @@
+body {
+    background-color: #000; 
+    color: #fff; 
+}
+
+/* Custom button styles */
+.btn-crimson {
+    background-color: crimson;
+    color: white;
+    border: none; /* Remove default border */
+}
+
+.btn-crimson:hover {
+    background-color: darkred;
+    color: white;
+    border: none; /* Remove default border */
+}
+
+/* Pagination styles */
+.pagination {
+    margin: 20px 0;
+}
+
+.page-link {
+    color: white;
+    background-color: #333; /* Dark background for pagination */
+    border-color: #444; /* Darker border color */
+}
+
+.page-link:hover {
+    color: crimson; /* Crimson text on hover */
+    background-color: #555; /* Slightly lighter background on hover */
+    border-color: crimson; /* Crimson border on hover */
+}
+
+.page-item.active .page-link {
+    background-color: crimson;
+    border-color: crimson;
+}
+
+/* Form styling for better visibility */
+form {
+    background-color: #222; /* Darker background for forms */
+    padding: 20px;
+    border-radius: 5px; /* Rounded corners for forms */
+}
+
+form label {
+    color: #fff; /* White text for form labels */
+}
+
+form input,
+form select,
+form textarea {
+    background-color: #333; /* Darker background for inputs */
+    color: #fff; /* White text for inputs */
+    border: 1px solid #555; /* Border color for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: crimson; /* Crimson border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Card styles to match dark theme */
+.card {
+    background-color: #222; /* Dark background for cards */
+    border: 1px solid #444; /* Border color for cards */
+}
+
+.card-img-top {
+    max-height: 200px; /* Limit image height */
+    object-fit: cover; /* Ensure image covers area */
+}
+
+.card-title,
+.card-text {
+    color: #fff; /* White text color for card title and text */
+}
+
+/* Footer styling */
+footer {
+    background-color: #111; /* Dark background for footer */
+    color: #777; /* Lighter text color for footer */
+}
+
+footer p {
+    margin: 0; 
+}

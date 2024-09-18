@@ -1,69 +1,15 @@
-/* Override Bootstrap Colors */
-
-/* Primary Color */
-:root {
-    --bs-primary: #333; /* Dark color for buttons and accents */
-    --bs-primary-rgb: 51, 51, 51;
+/* Ensure the form labels are visible on a dark background */
+.bg-dark .form-label {
+    color: #f8f9fa; /* Light color for labels */
 }
 
-/* Background Colors */
-body {
-    background-color: #0e0e0e;
-    color: #e0e0e0;
+.bg-dark .form-control {
+    background-color: #343a40; /* Dark background for inputs */
+    color: #f8f9fa; /* Light text color for inputs */
+    border: 1px solid #495057; /* Light border color for inputs */
 }
 
-.navbar-dark {
-    background-color: #1c1c1c; /* Dark background for the navbar */
-}
-
-.card {
-    background-color: #1c1c1c; /* Dark background for cards */
-    border: 1px solid #333;
-}
-
-.card-title {
-    color: #fff; /* White text for card titles */
-}
-
-/* Button Dark - Ensure this selector is not overridden */
-.btn-dark {
-    background-color: #333;
-    color: #fff;
-    border: none;
-}
-
-.btn-dark:hover {
-    background-color: #fff; /* White background on hover */
-    color: #333; /* Dark text color for contrast */
-    border: none; /* Remove border on hover if desired */
-}
-
-/* Pagination Styles */
-.pagination .page-link {
-    color: crimson; /* Crimson color for page numbers */
-    background-color: #333;
-    border: 1px solid #444;
-}
-
-.pagination .page-link:hover {
-    background-color: #444;
-    color: #fff;
-}
-
-.pagination .page-item.active .page-link {
-    background-color: #000;
-    border: 1px solid #000;
-}
-
-/* Footer */
-footer {
-    background-color: #1c1c1c;
-    color: #b0b0b0;
-}
-
-/* Hover Effects */
-.card:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
+.bg-dark .form-control:focus {
+    border-color: #f8f9fa; /* Highlight border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25); /* Optional shadow effect */
 }
