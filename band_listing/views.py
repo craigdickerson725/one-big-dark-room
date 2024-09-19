@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import generic
 from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from .forms import BandListingForm
 from .models import BandListing
 
 # Create your views here.
@@ -16,11 +19,16 @@ class BandListingList(generic.ListView):
         context['band_listings'] = context['object_list']  # Rename context variable
         return context
 
-class CreateListingView(CreateView):
+class CreateListingView(LoginRequiredMixin, CreateView):
     model = BandListing
-    fields = ['band_name', 'photo', 'description', 'status']  # Include fields to be filled in
+    form_class = BandListingForm
     template_name = 'band_listing/create_listing.html'
-    success_url = '/'  # Redirect to home after successful creation
+    success_url = reverse_lazy('index')  # Redirect to home page on success
+
+    def form_valid(self, form):
+        # Set the current user as the creator of the listing
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
