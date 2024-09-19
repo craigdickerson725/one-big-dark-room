@@ -15,10 +15,18 @@
         </div>
         <div class="col-md-6">
             <h3 class="text-white">Band Description</h3>
-            <!-- Use the `safe` filter to render HTML in the description -->
             <p class="text-white">{{ object.description|safe }}</p>
         </div>
     </div>
+
+    <!-- Conditionally show Edit and Delete buttons if the current user is the creator of the listing -->
+    {% if user == object.created_by %}
+    <div class="mt-4">
+        <a href="{% url 'edit_listing' object.slug %}" class="btn btn-secondary">Edit Listing</a>
+        <a href="{% url 'delete_listing' object.slug %}" class="btn btn-danger">Delete Listing</a>
+    </div>
+    {% endif %}
+
     <a href="{% url 'index' %}" class="btn btn-crimson mt-4">Back to Listings</a>
 </div>
 {% endblock %}

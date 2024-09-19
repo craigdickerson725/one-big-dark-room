@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Band Listing</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-crimson">Update Listing</button>
+    </form>
+</div>
+{% endblock %}

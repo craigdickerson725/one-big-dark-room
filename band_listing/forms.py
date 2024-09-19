@@ -6,7 +6,7 @@ from .models import BandListing
 class BandListingForm(forms.ModelForm):
     class Meta:
         model = BandListing
-        fields = ['band_name', 'photo', 'description', 'snippet', 'status']
+        fields = ['band_name', 'photo', 'description', 'snippet',]
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
             'snippet': forms.Textarea(attrs={'rows': 2}),
