@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views import generic
 from django.views.generic.edit import CreateView
 from .models import BandListing
@@ -20,6 +21,12 @@ class CreateListingView(CreateView):
     fields = ['band_name', 'photo', 'description', 'status']  # Include fields to be filled in
     template_name = 'band_listing/create_listing.html'
     success_url = '/'  # Redirect to home after successful creation
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'You must be logged in to create a band listing.')
+            return redirect('account_login')
+        return super().dispatch(request, *args, **kwargs)
 
 class BandListingDetail(generic.DetailView):
     model = BandListing
