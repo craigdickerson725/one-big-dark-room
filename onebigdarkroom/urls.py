@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from band_listing.views import my_band_listing
 
 urlpatterns = [
     path('admin/', admin.site.urls),
