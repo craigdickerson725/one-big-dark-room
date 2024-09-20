@@ -11,7 +11,10 @@
             {% for message in messages %}
                 <li class="list-group-item">
                     <a href="{% url 'message_detail' message.pk %}" class="text-white">
-                        Message from {{ message.sender.username }} about {{ message.band_listing.band_name }} - {{ message.timestamp|date:"F j, Y, g:i a" }}
+                        <strong>Message from {{ message.sender.username }}</strong> about <em>{{ message.band_listing.band_name }}</em> - {{ message.timestamp|date:"F j, Y, g:i a" }}
+                        {% if not message.is_read %}
+                            <span class="badge badge-danger">New</span>
+                        {% endif %}
                     </a>
                 </li>
             {% endfor %}

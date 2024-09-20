@@ -11,7 +11,7 @@ class BandListing(models.Model):
     description = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_listings")
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS, default=1)  # Set default to Published (1)
+    status = models.IntegerField(choices=STATUS, default=1)  # Default set to 'Published'
     snippet = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -22,6 +22,7 @@ class BandListing(models.Model):
         return f"{self.band_name} | {self.created_by.username}"
 
     def save(self, *args, **kwargs):
+        # Automatically generate slug from band name if not provided
         if not self.slug:
             self.slug = slugify(self.band_name)
         super().save(*args, **kwargs)
@@ -32,7 +33,7 @@ class Message(models.Model):
     band_listing = models.ForeignKey(BandListing, related_name='messages', on_delete=models.CASCADE)
     message_body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)  # Add this line
+    is_read = models.BooleanField(default=False)  # Field to track if the message has been read
 
     class Meta:
         ordering = ['-timestamp']

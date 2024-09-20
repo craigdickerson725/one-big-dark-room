@@ -101,7 +101,7 @@ class InboxView(LoginRequiredMixin, generic.ListView):
         context['unread_count'] = Message.objects.filter(recipient=self.request.user, is_read=False).count()
         return context
 
-# User's sent messages view
+# User's sent messages view (Outbox)
 class SentMessagesView(LoginRequiredMixin, generic.ListView):
     template_name = 'band_listing/sent_messages.html'
     context_object_name = 'sent_messages'
@@ -110,27 +110,30 @@ class SentMessagesView(LoginRequiredMixin, generic.ListView):
         return Message.objects.filter(sender=self.request.user).order_by('-timestamp')
 
 # Message detail view (to read and reply)
-class MessageDetailView(LoginRequiredMixin, generic.DetailView, FormView):
+class MessageDetailView(LoginRequiredMixin, generic.DetailView):
     model = Message
     template_name = 'band_listing/message_detail.html'
-    form_class = MessageForm
-
-    def form_valid(self, form):
-        # Reply logic
-        original_message = self.get_object()
-        reply_message = form.save(commit=False)
-        reply_message.sender = self.request.user
-        reply_message.recipient = original_message.sender
-        reply_message.band_listing = original_message.band_listing
-        reply_message.save()
-        messages.success(self.request, 'Reply sent successfully.')
-        return redirect('inbox')
+    context_object_name = 'original_message'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['original_message'] = self.get_object()
-        # Mark the message as read
+        context['form'] = MessageForm()  # Add an empty form to the context
         message = self.get_object()
-        message.is_read = True  # Set is_read to True
-        message.save()  # Save the updated message
+        if not message.is_read:  # Mark the message as read
+            message.is_read = True
+            message.save()
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            reply_message = form.save(commit=False)
+            reply_message.sender = self.request.user
+            reply_message.recipient = self.object.sender  # Reply to the original sender
+            reply_message.band_listing = self.object.band_listing
+            reply_message.save()
+            messages.success(request, 'Reply sent successfully.')
+            return redirect('inbox')
+        messages.error(request, 'There was an error sending your reply.')  # Handle form invalid case
+        return self.render_to_response({'form': form, 'original_message': self.object})

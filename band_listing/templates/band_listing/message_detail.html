@@ -4,14 +4,14 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4 text-white">Message from {{ message.sender.username }}</h2>
-    <p class="text-white"><strong>Band Listing:</strong> {{ message.band_listing.band_name }}</p>
-    <p class="text-white"><strong>Sent at:</strong> {{ message.timestamp|date:"F j, Y, g:i a" }}</p>
-    <p class="text-white">{{ message.message_body }}</p>
+    <h2 class="mb-4 text-white">Message from {{ original_message.sender.username }}</h2>
+    <p class="text-white"><strong>Band Listing:</strong> {{ original_message.band_listing.band_name }}</p>
+    <p class="text-white"><strong>Sent at:</strong> {{ original_message.timestamp|date:"F j, Y, g:i a" }}</p>
+    <p class="text-white">{{ original_message.message_body }}</p>
 
     <hr class="my-4">
 
-    <h3 class="text-white">Reply to {{ message.sender.username }}</h3>
+    <h3 class="text-white">Reply to {{ original_message.sender.username }}</h3>
     <form method="POST" class="form">
         {% csrf_token %}
         {{ form|crispy }}  <!-- Use crispy forms for styling -->

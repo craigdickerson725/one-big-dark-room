@@ -31,7 +31,7 @@ SECRET_KEY = 'Sk3l3tonk1ng'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-craigdicker-onebigdarkr-oeiin9roi9o.ws.codeinstitute-ide.net','.herokuapp.com']
 
@@ -87,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'band_listing.context_processors.unread_message_count',
             ],
         },
     },
@@ -96,14 +97,6 @@ WSGI_APPLICATION = 'onebigdarkroom.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
