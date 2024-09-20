@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-white">Your Inbox</h2>
+
+    {% if messages %}
+        <ul class="list-group">
+            {% for message in messages %}
+                <li class="list-group-item">
+                    <a href="{% url 'message_detail' message.pk %}" class="text-white">
+                        Message from {{ message.sender.username }} about {{ message.band_listing.band_name }} - {{ message.timestamp|date:"F j, Y, g:i a" }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-white">You have no messages.</p>
+    {% endif %}
+    
+    <a href="{% url 'index' %}" class="btn btn-crimson mt-4">Back to Listings</a>
+</div>
+{% endblock %}

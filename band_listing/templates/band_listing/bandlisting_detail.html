@@ -27,6 +27,13 @@
     </div>
     {% endif %}
 
+    <!-- Conditionally show Send Message button if the current user is not the creator of the listing -->
+    {% if user.is_authenticated and user != object.created_by %}
+    <div class="mt-4">
+        <a href="{% url 'send_message' object.slug %}" class="btn btn-primary">Send a Message</a>
+    </div>
+    {% endif %}
+
     <a href="{% url 'index' %}" class="btn btn-crimson mt-4">Back to Listings</a>
 </div>
 {% endblock %}

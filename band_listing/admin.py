@@ -2,15 +2,23 @@ from django.contrib import admin
 from .models import BandListing, Message
 from django_summernote.admin import SummernoteModelAdmin
 
-
 @admin.register(BandListing)
 class BandListingAdmin(SummernoteModelAdmin):
-    list_display = ('band_name', 'slug', 'status', 'created_at')  # Adjust based on BandListing fields
-    search_fields = ['band_name', 'description']  # You can add fields that make sense for searching
-    list_filter = ('status', 'created_at')  # Filter by status and creation date
-    prepopulated_fields = {'slug': ('band_name',)}  # Automatically generate slug from band_name
-    summernote_fields = ('description',)  # Add the field(s) where you want to use Summernote editor
+    list_display = ('band_name', 'slug', 'status', 'created_at')
+    search_fields = ['band_name', 'description']
+    list_filter = ('status', 'created_at')
+    prepopulated_fields = {'slug': ('band_name',)}
+    summernote_fields = ('description',)
 
-# Register your models here.
-# admin.site.register(BandListing)
-admin.site.register(Message)
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('sender', 'recipient', 'band_listing', 'timestamp')  # Display relevant fields
+    search_fields = ['sender__username', 'recipient__username', 'message_body']  # Add search fields
+    list_filter = ('timestamp',)  # Filter messages by timestamp
+    ordering = ('-timestamp',)  # Order messages by timestamp descending
+
+    def recipient_username(self, obj):
+        return obj.recipient.username if obj.recipient else 'Unknown'
+    
+    recipient_username.admin_order_field = 'recipient'  # Allows sorting by recipient
+    recipient_username.short_description = 'Recipient Username'
