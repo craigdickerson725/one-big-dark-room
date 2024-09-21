@@ -4,6 +4,8 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.db.models import Q
 from .forms import BandListingForm, MessageForm
 from .models import BandListing, Message
 
@@ -74,7 +76,7 @@ class SendMessageView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         band_listing = get_object_or_404(BandListing, slug=self.kwargs['slug'])
-        recipient = band_listing.created_by  # Send message to the creator of the band listing
+        recipient = band_listing.created_by
         form.instance.sender = self.request.user
         form.instance.recipient = recipient
         form.instance.band_listing = band_listing
@@ -87,27 +89,19 @@ class SendMessageView(LoginRequiredMixin, FormView):
         context['band_listing'] = get_object_or_404(BandListing, slug=self.kwargs['slug'])
         return context
 
-# User's inbox view
-class InboxView(LoginRequiredMixin, generic.ListView):
-    template_name = 'band_listing/inbox.html'
-    context_object_name = 'messages'
-
-    def get_queryset(self):
-        return Message.objects.filter(recipient=self.request.user).order_by('-timestamp')
+# User's messages view (inbox and outbox)
+class MessagesView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'band_listing/messages.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Count unread messages
-        context['unread_count'] = Message.objects.filter(recipient=self.request.user, is_read=False).count()
+        user = self.request.user
+        # Separate inbox and outbox messages
+        context['inbox_messages'] = Message.objects.filter(recipient=user).order_by('-timestamp')
+        context['outbox_messages'] = Message.objects.filter(sender=user).order_by('-timestamp')
+        # Count unread messages for the navbar alert
+        context['unread_count'] = Message.objects.filter(recipient=user, is_read=False).count()
         return context
-
-# User's sent messages view (Outbox)
-class SentMessagesView(LoginRequiredMixin, generic.ListView):
-    template_name = 'band_listing/sent_messages.html'
-    context_object_name = 'sent_messages'
-
-    def get_queryset(self):
-        return Message.objects.filter(sender=self.request.user).order_by('-timestamp')
 
 # Message detail view (to read and reply)
 class MessageDetailView(LoginRequiredMixin, generic.DetailView):
@@ -117,9 +111,9 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = MessageForm()  # Add an empty form to the context
+        context['form'] = MessageForm()
         message = self.get_object()
-        if not message.is_read:  # Mark the message as read
+        if not message.is_read:
             message.is_read = True
             message.save()
         return context
@@ -130,10 +124,30 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
         if form.is_valid():
             reply_message = form.save(commit=False)
             reply_message.sender = self.request.user
-            reply_message.recipient = self.object.sender  # Reply to the original sender
+            reply_message.recipient = self.object.sender
             reply_message.band_listing = self.object.band_listing
             reply_message.save()
             messages.success(request, 'Reply sent successfully.')
-            return redirect('inbox')
-        messages.error(request, 'There was an error sending your reply.')  # Handle form invalid case
+            return redirect('messages')
+        messages.error(request, 'There was an error sending your reply.')
         return self.render_to_response({'form': form, 'original_message': self.object})
+
+# Delete message view
+class DeleteMessageView(LoginRequiredMixin, DeleteView):
+    model = Message
+    template_name = 'band_listing/confirm_delete_message.html'
+    success_url = reverse_lazy('messages')
+
+    def get_object(self, queryset=None):
+        message = super().get_object(queryset)
+        if message.recipient != self.request.user and message.sender != self.request.user:
+            messages.error(self.request, "You cannot delete this message.")
+            return None
+        return message
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj:
+            messages.success(request, "Message deleted successfully.")
+            return super().delete(request, *args, **kwargs)
+        return HttpResponseRedirect(self.success_url)

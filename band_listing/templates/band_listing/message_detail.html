@@ -11,13 +11,17 @@
 
     <hr class="my-4">
 
-    <h3 class="text-white">Reply to {{ original_message.sender.username }}</h3>
-    <form method="POST" class="form">
-        {% csrf_token %}
-        {{ form|crispy }}  <!-- Use crispy forms for styling -->
-        <button type="submit" class="btn btn-crimson mt-3">Send Reply</button>
-    </form>
+    {% if original_message.sender != user %}
+        <h3 class="text-white">Reply to {{ original_message.sender.username }}</h3>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {{ form|crispy }}  <!-- Use crispy forms for styling -->
+            <button type="submit" class="btn btn-crimson mt-3">Send Reply</button>
+        </form>
+    {% else %}
+        <p class="text-warning">You cannot reply to yourself.</p>
+    {% endif %}
 
-    <a href="{% url 'inbox' %}" class="btn btn-secondary mt-3">Back to Inbox</a>
+    <a href="{% url 'messages' %}" class="btn btn-secondary mt-3">Back to Inbox</a>
 </div>
 {% endblock %}

@@ -65,6 +65,12 @@ form textarea:focus {
     outline: none; /* Remove default outline */
 }
 
+/* Remove margin and padding from inbox delete button */
+.delete-form {
+    margin: 0;
+    padding: 0;
+}
+
 /* Card styles to match dark theme */
 .card {
     background-color: #222; /* Dark background for cards */

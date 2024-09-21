@@ -32,15 +32,11 @@
                             <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inbox' %}">
-                                Inbox 
+                            <a class="nav-link" href="{% url 'messages' %}">Inbox 
                                 {% if unread_count|default:0 > 0 %}
                                     <span class="badge bg-danger">{{ unread_count }}</span>
                                 {% endif %}
                             </a> <!-- Inbox link with badge -->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sent_messages' %}">Outbox</a> <!-- Outbox link -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Logout" %}</a>
