@@ -1,3 +1,8 @@
+/* Custom style to override muted text color */
+.navbar .text-muted {
+    color: crimson !important;
+}
+
 body {
     background-color: #000; 
     color: #fff; 
@@ -63,6 +68,12 @@ form select:focus,
 form textarea:focus {
     border-color: crimson; /* Crimson border on focus */
     outline: none; /* Remove default outline */
+}
+
+/* Remove margin and padding from inbox delete button */
+.delete-form {
+    margin: 0;
+    padding: 0;
 }
 
 /* Card styles to match dark theme */

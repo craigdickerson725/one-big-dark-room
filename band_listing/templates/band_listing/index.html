@@ -10,11 +10,9 @@
             {% for listing in band_listings %}
                 <div class="col-md-4">
                     <div class="card mb-4 bg-dark text-white">
-                        {% if listing.photo %}
-                            <img src="{{ listing.photo.url }}" class="card-img-top" alt="{{ listing.band_name }}">
-                        {% else %}
-                            <img src="{% static 'images/default-image.jpg' %}" class="card-img-top" alt="Default Image">
-                        {% endif %}
+                        <!-- Use the photo_url property to handle both Cloudinary and default image -->
+                        <img src="{% if bandlisting.photo %}{{ bandlisting.photo.url }}{% else %}{% static 'images/default-image.jpg' %}{% endif %}" 
+                            alt="{{ bandlisting.band_name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ listing.band_name }}</h5>
                             <p class="card-text">{{ listing.snippet }}</p>

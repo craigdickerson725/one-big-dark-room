@@ -4,7 +4,7 @@ from .views import (
     EditListingView,
     DeleteListingView,
     SendMessageView,
-    MessagesView,  # Use MessagesView to display all messages
+    MessagesView,  
     MessageDetailView,
     DeleteMessageView,
 )

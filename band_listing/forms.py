@@ -18,6 +18,10 @@ class BandListingForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Create Listing'))
 
+        # Ensure the photo field is optional
+        self.fields['photo'].required = False
+
+
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message

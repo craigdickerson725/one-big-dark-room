@@ -1,3 +1,8 @@
+/* Custom style to override muted text color */
+.navbar .text-muted {
+    color: crimson !important;
+}
+
 body {
     background-color: #000; 
     color: #fff; 

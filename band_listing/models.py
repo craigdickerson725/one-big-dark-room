@@ -1,13 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
+
+STATUS = ((0, "Draft"), (1, "Published"))
+
+from django.db import models
+from django.contrib.auth.models import User
+from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
 class BandListing(models.Model):
     band_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    photo = models.ImageField(upload_to='band_photos/', default='default-image.jpg')
+    # Use CloudinaryField but remove default; we'll handle the default manually
+    photo = models.ImageField(upload_to='band_photos/', default='default-image.jpg', null=True, blank=True)
     description = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_listings")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -26,6 +35,13 @@ class BandListing(models.Model):
         if not self.slug:
             self.slug = slugify(self.band_name)
         super().save(*args, **kwargs)
+
+    @property
+    def photo_url(self):
+        # If photo is uploaded, return the Cloudinary URL, otherwise return the default static image URL
+        if self.photo:
+            return self.photo.url
+        return '/static/images/default-image.jpg'
 
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
