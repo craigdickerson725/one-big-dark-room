@@ -16,6 +16,7 @@ class BandListingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
+        self.helper.form_enctype = 'multipart/form-data'  # Required for file uploads
         self.helper.add_input(Submit('submit', 'Create Listing'))
 
         # Ensure the photo field is optional

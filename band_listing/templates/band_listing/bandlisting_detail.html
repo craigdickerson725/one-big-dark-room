@@ -5,13 +5,12 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-4 text-white">{{ object.band_name }}</h1>
+
     <div class="row">
         <div class="col-md-6">
-            {% if object.photo %}
-                <img src="{{ object.photo.url }}" class="img-fluid" alt="{{ object.band_name }}">
-            {% else %}
-                <img src="{% static 'images/default-image.jpg' %}" class="img-fluid" alt="Default Image">
-            {% endif %}
+            <!-- Use the custom class for the image -->
+            <img src="{% if object.photo %}{{ object.photo.url }}{% else %}https://res.cloudinary.com/dzx1hyh89/image/upload/v1727076263/default-image_kfzhkf.jpg{% endif %}" 
+                 class="img-fluid custom-img-details" alt="{{ object.band_name }}">
         </div>
         <div class="col-md-6">
             <h3 class="text-white">Band Description</h3>

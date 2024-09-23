@@ -44,6 +44,18 @@ class BandListingDetail(generic.DetailView):
     template_name = 'band_listing/bandlisting_detail.html'
     slug_field = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        band_listing = self.get_object()
+
+        # Check if the band listing has a photo, else provide a default image
+        if not band_listing.photo:
+            context['default_photo'] = 'images/default-image.jpg'  # Update with your default image path in the static directory
+        else:
+            context['default_photo'] = band_listing.photo.url
+
+        return context
+
 # Edit band listing view
 class EditListingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BandListing

@@ -43,6 +43,18 @@ body {
     border-color: crimson;
 }
 
+.custom-img {
+    width: 100%; /* Make the image responsive */
+    height: 200px; /* Set a fixed height for consistency */
+    object-fit: cover; /* Crop the image to fit */
+}
+
+.custom-img-details {
+    width: 100%; /* Make the image responsive */
+    height: 300px; /* Set a fixed height for consistency */
+    object-fit: cover; /* Crop the image to fit */
+}
+
 /* Form styling for better visibility */
 form {
     background-color: #222; /* Darker background for forms */

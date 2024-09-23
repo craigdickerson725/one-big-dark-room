@@ -15,8 +15,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class BandListing(models.Model):
     band_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    # Use CloudinaryField but remove default; we'll handle the default manually
-    photo = models.ImageField(upload_to='band_photos/', default='default-image.jpg', null=True, blank=True)
+    photo = CloudinaryField('photo', default='default-image_kfzhkf.jpg', blank=True, null=True)
     description = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_listings")
     created_at = models.DateTimeField(auto_now_add=True)
