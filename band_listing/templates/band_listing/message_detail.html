@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container">
     <h2 class="mb-4 text-white">Message from {{ original_message.sender.username }}</h2>
     <p class="text-white"><strong>Band Listing:</strong> {{ original_message.band_listing.band_name }}</p>
     <p class="text-white"><strong>Sent at:</strong> {{ original_message.timestamp|date:"F j, Y, g:i a" }}</p>

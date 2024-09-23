@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="container mt-5">
+    <div class="container">
         <h1 class="mb-4 text-white">Band Listings</h1>
 
         <!-- Display the listings -->
@@ -16,10 +16,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ listing.band_name }}</h5>
                             <p class="card-text">{{ listing.snippet }}</p>
-                            <a href="{% url 'bandlisting_detail' listing.slug %}" class="btn btn-crimson">View Details</a>
-                            {% if user.is_authenticated %}  <!-- Show message button if logged in -->
-                                <a href="{% url 'send_message' listing.slug %}" class="btn btn-secondary">Message</a>
-                            {% endif %}
+                            <a href="{% url 'bandlisting_detail' listing.slug %}" class="btn btn-crimson">View Details</a>   
                         </div>
                     </div>
                 </div>

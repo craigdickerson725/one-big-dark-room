@@ -1,4 +1,26 @@
-/* Custom style to override muted text color */
+/* Font for site */
+body {
+    font-family: 'Palanquin Dark', sans-serif;
+    font-weight: 400;
+}
+
+/* Custom navbar settings */
+.navbar {
+    padding: 1.5rem 1rem; /* Adjust the padding as desired */
+}
+
+.navbar-brand {
+    font-size: 1.5rem; /* Increase font size of the brand/logo */
+}
+
+.nav-link {
+    color: #d1cbcb !important;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2rem; /* Increase the font size of the nav links */
+}
+
 .navbar .text-muted {
     color: crimson !important;
 }
