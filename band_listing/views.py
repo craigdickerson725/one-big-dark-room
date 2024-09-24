@@ -30,6 +30,7 @@ class CreateListingView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         form.instance.status = 1  # Automatically set to "Published"
+        messages.success(self.request, 'Band listing successfully created!')
         return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
@@ -50,7 +51,7 @@ class BandListingDetail(generic.DetailView):
 
         # Check if the band listing has a photo, else provide a default image
         if not band_listing.photo:
-            context['default_photo'] = 'images/default-image.jpg'  # Update with your default image path in the static directory
+            context['default_photo'] = 'images/default-image.jpg'  # Update with default image path in the static directory
         else:
             context['default_photo'] = band_listing.photo.url
 
@@ -65,6 +66,7 @@ class EditListingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
+        messages.success(self.request, 'Band listing successfully edited!')
         return super().form_valid(form)
 
     def test_func(self):
@@ -81,6 +83,10 @@ class DeleteListingView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         listing = self.get_object()
         return self.request.user == listing.created_by
 
+    def post(self, request, *args, **kwargs):
+        messages.success(self.request, 'Band listing successfully deleted.')
+        return super().post(request, *args, **kwargs)
+        
 # Send message view
 class SendMessageView(LoginRequiredMixin, FormView):
     form_class = MessageForm

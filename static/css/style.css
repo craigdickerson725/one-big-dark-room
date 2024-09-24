@@ -6,7 +6,7 @@ body {
 
 /* Custom navbar settings */
 .navbar {
-    padding: 1.5rem 1rem; /* Adjust the padding as desired */
+    padding: 1.5rem 1rem;
 }
 
 .navbar-brand {
@@ -25,6 +25,8 @@ body {
     color: crimson !important;
 }
 
+/* Body */
+
 body {
     background-color: #000; 
     color: #fff; 
@@ -34,13 +36,13 @@ body {
 .btn-crimson {
     background-color: crimson;
     color: white;
-    border: none; /* Remove default border */
+    border: none;
 }
 
 .btn-crimson:hover {
     background-color: darkred;
     color: white;
-    border: none; /* Remove default border */
+    border: none;
 }
 
 /* Pagination styles */
@@ -66,13 +68,13 @@ body {
 }
 
 .custom-img {
-    width: 100%; /* Make the image responsive */
+    width: 100%;
     height: 200px; /* Set a fixed height for consistency */
     object-fit: cover; /* Crop the image to fit */
 }
 
 .custom-img-details {
-    width: 100%; /* Make the image responsive */
+    width: 100%;
     height: 300px; /* Set a fixed height for consistency */
     object-fit: cover; /* Crop the image to fit */
 }

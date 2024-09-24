@@ -9,7 +9,7 @@ class BandListingForm(forms.ModelForm):
         fields = ['band_name', 'photo', 'description', 'snippet']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
-            'snippet': forms.Textarea(attrs={'rows': 2}),
+            'snippet': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Example: Post-punk band from New York, New York'}),
         }
 
     def __init__(self, *args, **kwargs):
