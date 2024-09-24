@@ -115,8 +115,8 @@ class MessagesView(LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         # Separate inbox and outbox messages
-        context['inbox_messages'] = Message.objects.filter(recipient=user).order_by('-timestamp')
-        context['outbox_messages'] = Message.objects.filter(sender=user).order_by('-timestamp')
+        context['inbox_messages'] = Message.objects.filter(recipient=user, deleted_by_recipient=False).order_by('-timestamp')
+        context['outbox_messages'] = Message.objects.filter(sender=user, deleted_by_sender=False).order_by('-timestamp')
         # Count unread messages for the navbar alert
         context['unread_count'] = Message.objects.filter(recipient=user, is_read=False).count()
         return context
@@ -151,21 +151,53 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
         return self.render_to_response({'form': form, 'original_message': self.object})
 
 # Delete message view
-class DeleteMessageView(LoginRequiredMixin, DeleteView):
-    model = Message
-    template_name = 'band_listing/confirm_delete_message.html'
-    success_url = reverse_lazy('messages')
+# class DeleteMessageView(LoginRequiredMixin, DeleteView):
+#     model = Message
+#     template_name = 'band_listing/confirm_delete_message.html'
+#     success_url = reverse_lazy('messages')
 
-    def get_object(self, queryset=None):
-        message = super().get_object(queryset)
-        if message.recipient != self.request.user and message.sender != self.request.user:
-            messages.error(self.request, "You cannot delete this message.")
-            return None
-        return message
+#     def get_object(self, queryset=None):
+#         message = super().get_object(queryset)
+#         if message.recipient != self.request.user and message.sender != self.request.user:
+#             messages.error(self.request, "You cannot delete this message.")
+#             return None
+#         return message
 
-    def delete(self, request, *args, **kwargs):
-        obj = self.get_object()
-        if obj:
-            messages.success(request, "Message deleted successfully.")
-            return super().delete(request, *args, **kwargs)
-        return HttpResponseRedirect(self.success_url)
+#     def delete(self, request, *args, **kwargs):
+#         obj = self.get_object()
+#         if obj:
+#             messages.success(request, "Message deleted successfully.")
+#             return super().delete(request, *args, **kwargs)
+#         return HttpResponseRedirect(self.success_url)
+
+def delete_by_sender(request, id):
+    message = get_object_or_404(Message, id=id)
+    if not message.sender == request.user:
+        messages.error(request, "You cannot delete this message.")
+        return redirect('messages')
+    if message.deleted_by_recipient:
+        message.delete()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+    
+    else:
+        message.deleted_by_sender = True
+        message.save()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+
+def delete_by_recipient(request, id):
+    message = get_object_or_404(Message, id=id)
+    if not message.recipient == request.user:
+        messages.error(request, "You cannot delete this message.")
+        return redirect('messages')
+    if message.deleted_by_sender:
+        message.delete()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+    
+    else:
+        message.deleted_by_recipient = True
+        message.save()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')

@@ -49,6 +49,8 @@ class Message(models.Model):
     message_body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)  # Field to track if the message has been read
+    deleted_by_sender = models.BooleanField(default=False)
+    deleted_by_recipient = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-timestamp']

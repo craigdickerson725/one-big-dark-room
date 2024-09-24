@@ -27,10 +27,28 @@
                     <td>{{ message.timestamp|date:"F j, Y, g:i a" }}</td>
                     <td class="text-center">
                         <!-- Delete button -->
-                        <form action="{% url 'delete_message' message.pk %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-delete-inbox-{{message.id}}">
+                            Delete
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-delete-inbox-{{message.id}}" tabindex="-1" aria-labelledby="modal-delete-inbox-{{message.id}}-Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-delete-inbox-{{message.id}}-Label">Delete Message</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this message?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        <a href="{% url 'delete_message_recipient' message.id %}" class="btn btn-primary">Yes</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
@@ -64,10 +82,29 @@
                     <td>{{ message.timestamp|date:"F j, Y, g:i a" }}</td>
                     <td class="text-center">
                         <!-- Delete button -->
-                        <form action="{% url 'delete_message' message.pk %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                         
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-delete-outbox-{{message.id}}">
+                            Delete
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-delete-outbox-{{message.id}}" tabindex="-1" aria-labelledby="modal-delete-outbox-{{message.id}}-Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-delete-outbox-{{message.id}}-Label">Delete Message</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this message?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        <a href="{% url 'delete_message_sender' message.id %}" class="btn btn-primary">Yes</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
