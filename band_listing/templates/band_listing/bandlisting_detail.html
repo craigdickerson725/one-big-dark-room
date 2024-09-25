@@ -22,8 +22,37 @@
     {% if user == object.created_by %}
     <div class="mt-4">
         <a href="{% url 'edit_listing' object.slug %}" class="btn btn-secondary">Edit Listing</a>
-        <a href="{% url 'delete_listing' object.slug %}" class="btn btn-danger">Delete Listing</a>
+
+        <!-- Trigger the Delete modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-listing">
+            Delete Listing
+        </button>
     </div>
+
+    <!-- Modal for confirming deletion -->
+    <div class="modal fade" id="modal-delete-listing" tabindex="-1" aria-labelledby="modal-delete-listing-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-delete-listing-Label">Delete Band Listing</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete the band listing "{{ object.band_name }}"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    
+                    <!-- Form for submitting the DELETE request -->
+                    <form method="POST" action="{% url 'delete_listing' object.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-crimson">Yes</button>
+                    </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
     {% endif %}
 
     <!-- Conditionally show Send Message button if the current user is not the creator of the listing -->

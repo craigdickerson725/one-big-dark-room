@@ -76,7 +76,6 @@ class EditListingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 # Delete band listing view
 class DeleteListingView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = BandListing
-    template_name = 'band_listing/confirm_delete.html'
     success_url = reverse_lazy('index')
 
     def test_func(self):
@@ -149,26 +148,6 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
             return redirect('messages')
         messages.error(request, 'There was an error sending your reply.')
         return self.render_to_response({'form': form, 'original_message': self.object})
-
-# Delete message view
-# class DeleteMessageView(LoginRequiredMixin, DeleteView):
-#     model = Message
-#     template_name = 'band_listing/confirm_delete_message.html'
-#     success_url = reverse_lazy('messages')
-
-#     def get_object(self, queryset=None):
-#         message = super().get_object(queryset)
-#         if message.recipient != self.request.user and message.sender != self.request.user:
-#             messages.error(self.request, "You cannot delete this message.")
-#             return None
-#         return message
-
-#     def delete(self, request, *args, **kwargs):
-#         obj = self.get_object()
-#         if obj:
-#             messages.success(request, "Message deleted successfully.")
-#             return super().delete(request, *args, **kwargs)
-#         return HttpResponseRedirect(self.success_url)
 
 def delete_by_sender(request, id):
     message = get_object_or_404(Message, id=id)

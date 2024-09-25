@@ -6,7 +6,6 @@ from .views import (
     SendMessageView,
     MessagesView,  
     MessageDetailView,
-    # DeleteMessageView,
 )
 from django.urls import path
 
@@ -17,7 +16,6 @@ urlpatterns = [
     # Messaging functionality
     path('messages/', MessagesView.as_view(), name='messages'),  # View all user's messages (received and sent)
     path('messages/<int:pk>/', MessageDetailView.as_view(), name='message_detail'),  # View and reply to a message
-    # path('messages/<int:pk>/delete/', DeleteMessageView.as_view(), name='delete_message'),  # Delete a message
     path('messages/<int:id>/delete/sender/', views.delete_by_sender, name='delete_message_sender'),
     path('messages/<int:id>/delete/recipient/', views.delete_by_recipient, name='delete_message_recipient'),
 

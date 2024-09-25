@@ -13,9 +13,7 @@
     </form>
 
     <p class="text-center mt-4">
-        <a href="{% url 'account_reset_password' %}">{% trans "Forgot your password?" %}</a>
-        <br>
-        <a href="{% url 'account_signup' %}">{% trans "Don't have an account? Sign up" %}</a>
+        <a href="{% url 'account_signup' %}" class="signup-link">{% trans "Don't have an account? Sign up" %}</a>
     </p>
 </div>
 {% endblock %}

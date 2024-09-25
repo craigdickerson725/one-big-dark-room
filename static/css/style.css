@@ -18,7 +18,7 @@ body {
 }
 
 .navbar-nav .nav-link {
-    font-size: 1.2rem; /* Increase the font size of the nav links */
+    font-size: 1rem; /* Increase the font size of the nav links */
 }
 
 .navbar .text-muted {
@@ -30,6 +30,10 @@ body {
 body {
     background-color: #000; 
     color: #fff; 
+}
+
+.message-display {
+    width: 100%;
 }
 
 /* Custom button styles */
@@ -84,6 +88,7 @@ form {
     background-color: #222; /* Darker background for forms */
     padding: 20px;
     border-radius: 5px; /* Rounded corners for forms */
+    margin-bottom: 1rem;
 }
 
 form label {
@@ -112,6 +117,41 @@ form textarea:focus {
     padding: 0;
 }
 
+/* Custom styles for success messages */
+.alert-success {
+    background-color: darkred !important; 
+    color: white !important;
+    border: none;
+    font-weight: bold;
+}
+
+/* Custom styles for logout alert */
+.alert-warning {
+    background-color: darkred !important;
+    color: white !important;
+    border: none;
+}
+
+/* Custom styles for the login link in the signup page */
+.login-link {
+    color: crimson;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    color: darkred;
+}
+
+/* Custom styles for the signup link in the login page */
+.signup-link {
+    color: crimson;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    color: darkred;
+}
+
 /* Card styles to match dark theme */
 .card {
     background-color: #222; /* Dark background for cards */
@@ -128,6 +168,39 @@ form textarea:focus {
     color: #fff; /* White text color for card title and text */
 }
 
+/* Tables */
+.table>:not(caption)>*>* {
+    background-color: #212529;
+    border-bottom-width: 1px;
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    color: white;
+}
+
+/* Override Bootstrap's table-hover for the entire row */
+.unread-message a {
+    color: white !important;
+    text-decoration: none;  /* Remove underline */
+}
+
+/* Modals */
+.modal-content {
+    color: black;
+}
+
+.modal-header {
+    background-color: crimson;
+    color: white
+}
+
+.modal-footer {
+    background-color: #222222;
+}
+
 /* Footer styling */
 footer {
     background-color: #111; /* Dark background for footer */
@@ -136,4 +209,30 @@ footer {
 
 footer p {
     margin: 0; 
+}
+
+.footer-link {
+    margin: 0 15px;
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+    /* Hide the Band Listing column on smaller screens */
+    .band-listing-column {
+        display: none;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 576px) {
+    .footer-link {
+        margin: 0 10px; /* Reduced spacing for smaller screens */
+        display: inline-block; /* Ensure links display inline */
+    }
+
+    footer {
+        text-align: center; /* Center text on mobile */
+        padding: 10px 0; /* Adjust padding for better appearance */
+    }
 }
