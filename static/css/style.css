@@ -208,7 +208,12 @@ footer {
 }
 
 footer p {
-    margin: 0; 
+    margin: 0;
+}
+
+footer a {
+    display: inline-block;
+    margin-right: 5px; /* optional, to add spacing between icons */
 }
 
 .footer-link {
