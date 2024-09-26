@@ -17,6 +17,10 @@ body {
     color: #d1cbcb !important;
 }
 
+.nav-link:hover {
+    color: crimson !important;
+}
+
 .navbar-nav .nav-link {
     font-size: 1rem; /* Increase the font size of the nav links */
 }
@@ -213,11 +217,15 @@ footer p {
 
 footer a {
     display: inline-block;
-    margin-right: 5px; /* optional, to add spacing between icons */
+    margin-right: 5px; 
 }
 
 .footer-link {
     margin: 0 15px;
+}
+
+.footer-link:hover {
+    color: crimson !important;
 }
 
 /* Media queries */
