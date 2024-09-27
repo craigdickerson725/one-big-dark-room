@@ -10,11 +10,15 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 
+# Choices for the status of a band listing
 STATUS = ((0, "Draft"), (1, "Published"))
 
+# Model for band listings
 class BandListing(models.Model):
     band_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
+
+    # Cloudinary field for the band photo, with a default placeholder image
     photo = CloudinaryField('photo', default='default-image_kfzhkf.jpg', blank=True, null=True)
     description = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_listings")
@@ -42,6 +46,7 @@ class BandListing(models.Model):
             return self.photo.url
         return '/static/images/default-image.jpg'
 
+# Model for messages between users regarding band listings
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
     recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)

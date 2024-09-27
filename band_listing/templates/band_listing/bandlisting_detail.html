@@ -4,32 +4,35 @@
 
 {% block content %}
 <div class="container">
+    <!-- Band name displayed as the page title -->
     <h1 class="mb-4 text-white">{{ object.band_name }}</h1>
 
     <div class="row">
         <div class="col-md-6">
-            <!-- Use the custom class for the image -->
+            <!-- Display band image or a default placeholder image if no photo is available -->
             <img src="{% if object.photo %}{{ object.photo.url }}{% else %}https://res.cloudinary.com/dzx1hyh89/image/upload/v1727076263/default-image_kfzhkf.jpg{% endif %}" 
                  class="img-fluid custom-img-details" alt="{{ object.band_name }}">
         </div>
         <div class="col-md-6">
+            <!-- Band description section -->
             <h3 class="text-white">Band Description</h3>
             <p class="text-white">{{ object.description|safe }}</p>
         </div>
     </div>
 
-    <!-- Conditionally show Edit and Delete buttons if the current user is the creator of the listing -->
+    <!-- Edit and Delete buttons displayed only if the current user is the creator of the listing -->
     {% if user == object.created_by %}
     <div class="mt-4">
+        <!-- Link to edit the listing -->
         <a href="{% url 'edit_listing' object.slug %}" class="btn btn-secondary">Edit Listing</a>
 
-        <!-- Trigger the Delete modal -->
+        <!-- Button to trigger the delete confirmation modal -->
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-listing">
             Delete Listing
         </button>
     </div>
 
-    <!-- Modal for confirming deletion -->
+    <!-- Modal for confirming deletion of the band listing -->
     <div class="modal fade" id="modal-delete-listing" tabindex="-1" aria-labelledby="modal-delete-listing-Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -38,9 +41,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- Confirm deletion message -->
                     Are you sure you want to delete the band listing "{{ object.band_name }}"?
                 </div>
                 <div class="modal-footer">
+                    <!-- Cancel button to dismiss the modal -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     
                     <!-- Form for submitting the DELETE request -->
@@ -48,20 +53,20 @@
                         {% csrf_token %}
                         <button type="submit" class="btn btn-crimson">Yes</button>
                     </form>
-            </div>
+                </div>
             </div>
         </div>
     </div>
-
     {% endif %}
 
-    <!-- Conditionally show Send Message button if the current user is not the creator of the listing -->
+    <!-- Show the 'Send Message' button only if the user is authenticated and is not the creator of the listing -->
     {% if user.is_authenticated and user != object.created_by %}
     <div class="mt-4">
         <a href="{% url 'send_message' object.slug %}" class="btn btn-crimson">Send a Message</a>
     </div>
     {% endif %}
 
+    <!-- Back to listings button -->
     <a href="{% url 'index' %}" class="btn btn-crimson mt-4">Back to Listings</a>
 </div>
 {% endblock %}

@@ -9,89 +9,97 @@ from django.db.models import Q
 from .forms import BandListingForm, MessageForm
 from .models import BandListing, Message
 
-# Band listing list view
+# View for displaying the list of band listings
 class BandListingList(generic.ListView):
-    queryset = BandListing.objects.filter(status=1)
+    queryset = BandListing.objects.filter(status=1)  # Show only 'Published' listings
     template_name = 'band_listing/index.html'
-    paginate_by = 6
+    paginate_by = 6  # Pagination, 6 listings per page
 
     def get_context_data(self, **kwargs):
+        # Add additional context data: 'band_listings' will refer to the list of objects
         context = super().get_context_data(**kwargs)
         context['band_listings'] = context['object_list']
         return context
 
-# Create listing view
+# View for creating a new band listing
 class CreateListingView(LoginRequiredMixin, CreateView):
     model = BandListing
     form_class = BandListingForm
     template_name = 'band_listing/create_listing.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('index')  # Redirect to index page after successful creation
 
     def form_valid(self, form):
+        # Automatically set the creator and status of the band listing
         form.instance.created_by = self.request.user
-        form.instance.status = 1  # Automatically set to "Published"
+        form.instance.status = 1  # Automatically set status to "Published"
         messages.success(self.request, 'Band listing successfully created!')
         return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
+        # Ensure the user is authenticated before allowing them to create a listing
         if not request.user.is_authenticated:
             messages.error(request, 'You must be logged in to create a band listing.')
             return redirect('account_login')
         return super().dispatch(request, *args, **kwargs)
 
-# Band listing detail view
+# View for displaying details of a single band listing
 class BandListingDetail(generic.DetailView):
     model = BandListing
     template_name = 'band_listing/bandlisting_detail.html'
-    slug_field = 'slug'
+    slug_field = 'slug'  # Use 'slug' field for finding the object
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         band_listing = self.get_object()
 
-        # Check if the band listing has a photo, else provide a default image
+        # Check if the band listing has a photo, otherwise use a default image
         if not band_listing.photo:
-            context['default_photo'] = 'images/default-image.jpg'  # Update with default image path in the static directory
+            context['default_photo'] = 'images/default-image.jpg'  # Default image path
         else:
             context['default_photo'] = band_listing.photo.url
 
         return context
 
-# Edit band listing view
+# View for editing an existing band listing
 class EditListingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BandListing
     form_class = BandListingForm
     template_name = 'band_listing/edit_listing.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('index')  # Redirect to index page after successful editing
 
     def form_valid(self, form):
+        # Ensure the listing is updated by the user who created it
         form.instance.created_by = self.request.user
         messages.success(self.request, 'Band listing successfully edited!')
         return super().form_valid(form)
 
     def test_func(self):
+        # Check if the logged-in user is the creator of the listing
         listing = self.get_object()
         return self.request.user == listing.created_by
 
-# Delete band listing view
+# View for deleting a band listing
 class DeleteListingView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = BandListing
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('index')  # Redirect to index page after deletion
 
     def test_func(self):
+        # Check if the logged-in user is the creator of the listing
         listing = self.get_object()
         return self.request.user == listing.created_by
 
     def post(self, request, *args, **kwargs):
+        # Confirm deletion with a success message
         messages.success(self.request, 'Band listing successfully deleted.')
         return super().post(request, *args, **kwargs)
-        
-# Send message view
+
+# View for sending messages to the creator of a band listing
 class SendMessageView(LoginRequiredMixin, FormView):
     form_class = MessageForm
     template_name = 'band_listing/send_message.html'
 
     def form_valid(self, form):
+        # Send a message to the creator of the band listing
         band_listing = get_object_or_404(BandListing, slug=self.kwargs['slug'])
         recipient = band_listing.created_by
         form.instance.sender = self.request.user
@@ -102,31 +110,33 @@ class SendMessageView(LoginRequiredMixin, FormView):
         return redirect('bandlisting_detail', slug=band_listing.slug)
 
     def get_context_data(self, **kwargs):
+        # Include the band listing in the context
         context = super().get_context_data(**kwargs)
         context['band_listing'] = get_object_or_404(BandListing, slug=self.kwargs['slug'])
         return context
 
-# User's messages view (inbox and outbox)
+# View for showing both inbox and outbox messages for the user
 class MessagesView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'band_listing/messages.html'
 
     def get_context_data(self, **kwargs):
+        # Separate the inbox and outbox messages
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        # Separate inbox and outbox messages
         context['inbox_messages'] = Message.objects.filter(recipient=user, deleted_by_recipient=False).order_by('-timestamp')
         context['outbox_messages'] = Message.objects.filter(sender=user, deleted_by_sender=False).order_by('-timestamp')
-        # Count unread messages for the navbar alert
+        # Add a count of unread messages for the inbox alert
         context['unread_count'] = Message.objects.filter(recipient=user, is_read=False).count()
         return context
 
-# Message detail view (to read and reply)
+# View for reading and replying to a specific message
 class MessageDetailView(LoginRequiredMixin, generic.DetailView):
     model = Message
     template_name = 'band_listing/message_detail.html'
     context_object_name = 'original_message'
 
     def get_context_data(self, **kwargs):
+        # Mark message as read and provide a form for replying
         context = super().get_context_data(**kwargs)
         context['form'] = MessageForm()
         message = self.get_object()
@@ -136,6 +146,7 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
+        # Handle sending a reply to the original message
         self.object = self.get_object()
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -149,6 +160,7 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
         messages.error(request, 'There was an error sending your reply.')
         return self.render_to_response({'form': form, 'original_message': self.object})
 
+# Function for allowing a sender to delete a message
 def delete_by_sender(request, id):
     message = get_object_or_404(Message, id=id)
     if not message.sender == request.user:
@@ -158,13 +170,13 @@ def delete_by_sender(request, id):
         message.delete()
         messages.success(request, "Message deleted successfully.")
         return redirect('messages')
-    
     else:
         message.deleted_by_sender = True
         message.save()
         messages.success(request, "Message deleted successfully.")
         return redirect('messages')
 
+# Function for allowing a recipient to delete a message
 def delete_by_recipient(request, id):
     message = get_object_or_404(Message, id=id)
     if not message.recipient == request.user:
@@ -174,7 +186,6 @@ def delete_by_recipient(request, id):
         message.delete()
         messages.success(request, "Message deleted successfully.")
         return redirect('messages')
-    
     else:
         message.deleted_by_recipient = True
         message.save()

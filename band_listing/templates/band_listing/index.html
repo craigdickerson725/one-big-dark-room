@@ -3,29 +3,34 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="mb-4 text-white">Band Listings</h1>
+        <!-- Main heading for the page -->
+        <h1 class="mb-4 text-white">Band Listings
+            <span class="tag-line">...search the listings to find your next band project...</span>
+        </h1>
 
-        <!-- Display the listings -->
+        <!-- Display the band listings in a grid format -->
         <div class="row">
             {% for listing in band_listings %}
                 <div class="col-md-4">
                     <div class="card mb-4 bg-dark text-white">
-                        <!-- Add the class 'card-img-top' to maintain consistency -->
+                        <!-- Display band photo; fallback to default image if none is available -->
                         <img src="{% if listing.photo %}{{ listing.photo.url }}{% else %}{% static 'images/default-image.jpg' %}{% endif %}" 
                             alt="{{ listing.band_name }}" class="card-img-top custom-img">
                         <div class="card-body">
                             <h5 class="card-title">{{ listing.band_name }}</h5>
                             <p class="card-text">{{ listing.snippet }}</p>
+                            <!-- Link to view details of the band listing -->
                             <a href="{% url 'bandlisting_detail' listing.slug %}" class="btn btn-crimson">View Details</a>   
                         </div>
                     </div>
                 </div>
             {% empty %}
+                <!-- Message when no listings are found -->
                 <p class="text-white">No listings found.</p>
             {% endfor %}
         </div>
 
-        <!-- Pagination controls -->
+        <!-- Pagination controls for navigating through multiple pages of listings -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 {% if is_paginated %}
@@ -43,6 +48,7 @@
                         </li>
                     {% endif %}
 
+                    <!-- Loop through page numbers for pagination -->
                     {% for num in page_obj.paginator.page_range %}
                         {% if page_obj.number == num %}
                             <li class="page-item active">

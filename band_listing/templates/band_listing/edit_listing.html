@@ -3,10 +3,15 @@
 
 {% block content %}
 <div class="container">
+    <!-- Page heading for editing the band listing -->
     <h2>Edit Band Listing</h2>
+    
+    <!-- Form for editing the band listing -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <!-- Use crispy forms to display the form fields in a styled format -->
         {{ form|crispy }}
+        <!-- Submit button for updating the listing -->
         <button type="submit" class="btn btn-crimson">Update Listing</button>
     </form>
 </div>

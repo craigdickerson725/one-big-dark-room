@@ -3,10 +3,17 @@
 
 {% block content %}
 <div class="container">
-    <h2>Create a Band Listing</h2>
+    <!-- Page heading with a tag line for instructions -->
+    <h2>Create a Band Listing
+        <span class="tag-line">Searching for band members? Create a listing and describe what you're looking for.</span>
+    </h2>
+    
+    <!-- Form for creating a band listing -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <!-- Use crispy forms to display the form fields in a styled format -->
         {{ form|crispy }}
+        <!-- Submit button for creating the listing -->
         <button type="submit" class="btn btn-crimson">Create Listing</button>
     </form>
 </div>

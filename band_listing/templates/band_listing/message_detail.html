@@ -4,13 +4,17 @@
 
 {% block content %}
 <div class="container">
+    <!-- Main heading for the message detail -->
     <h2 class="mb-4 text-white">Message from {{ original_message.sender.username }}</h2>
+
+    <!-- Display details about the message -->
     <p class="text-white"><strong>Band Listing:</strong> {{ original_message.band_listing.band_name }}</p>
     <p class="text-white"><strong>Sent at:</strong> {{ original_message.timestamp|date:"F j, Y, g:i a" }}</p>
     <p class="text-white">{{ original_message.message_body }}</p>
 
     <hr class="my-4">
 
+    <!-- Condition to show reply form if the user is not the sender -->
     {% if original_message.sender != user %}
         <h3 class="text-white">Reply to {{ original_message.sender.username }}</h3>
         <form method="POST" class="form">
@@ -19,9 +23,11 @@
             <button type="submit" class="btn btn-crimson mt-3">Send Reply</button>
         </form>
     {% else %}
+        <!-- Warning message if the user tries to reply to themselves -->
         <p class="text-warning">You cannot reply to yourself.</p>
     {% endif %}
 
+    <!-- Button to return to the inbox -->
     <a href="{% url 'messages' %}" class="btn btn-secondary mt-3">Back to Inbox</a>
 </div>
 {% endblock %}

@@ -4,14 +4,17 @@
 
 {% block content %}
 <div class="container">
+    <!-- Page title: Shows who the message is being sent to -->
     <h2 class="mb-4 text-white">Send a message to {{ band_listing.created_by.username }}</h2>
 
+    <!-- Message form -->
     <form method="POST" class="form">
         {% csrf_token %}
         {{ form|crispy }}  <!-- Use crispy forms for styling -->
-        <button type="submit" class="btn btn-crimson mt-3">Send Message</button>
+        <button type="submit" class="btn btn-crimson mt-3">Send Message</button> <!-- Submit button for sending the message -->
     </form>
 
+    <!-- Cancel button to return to the band listing details page -->
     <a href="{% url 'bandlisting_detail' band_listing.slug %}" class="btn btn-secondary mt-3">Cancel</a>
 </div>
 {% endblock %}

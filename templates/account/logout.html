@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-
 {% block content %}
 <div class="container">
+    <!-- Page title  -->
     <h2 class="text-white">Log Out</h2>
+    
+    <!-- Alert message warning the user before logging out -->
     <div class="alert alert-warning" role="alert">
         Are you sure you want to log out?
     </div>
+    
+    <!-- Form to confirm logout -->
     <form method="post">
         {% csrf_token %}
+        
+        <!-- Button to confirm logout -->
         <button type="submit" class="btn btn-crimson">Yes, Log Out</button>
+        
+        <!-- Button to cancel logout, redirects user to the index page -->
         <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>

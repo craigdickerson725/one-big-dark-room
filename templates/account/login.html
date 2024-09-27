@@ -3,15 +3,23 @@
 
 {% block content %}
 <div class="container">
+    <!-- Page title  -->
     <h2 class="text-center mb-4">{% trans "Login" %}</h2>
+    
+    <!-- Form for logging in, POST method with CSRF token for security -->
     <form method="post" action="{% url 'account_login' %}">
         {% csrf_token %}
+        
+        <!-- Renders the form fields, using {{ form.as_p }} to format them as paragraphs -->
         {{ form.as_p }}
+        
+        <!-- A button to submit the form, styled with Bootstrap classes -->
         <div class="d-grid gap-2 col-6 mx-auto">
             <button type="submit" class="btn btn-crimson">{% trans "Login" %}</button>
         </div>
     </form>
 
+    <!-- Link to the signup page for users who don't have an account -->
     <p class="text-center mt-4">
         <a href="{% url 'account_signup' %}" class="signup-link">{% trans "Don't have an account? Sign up" %}</a>
     </p>
