@@ -36,6 +36,11 @@ body {
     color: #fff; 
 }
 
+.tag-line {
+    font-size: 0.5em;
+    color: crimson;
+}
+
 .message-display {
     width: 100%;
 }
