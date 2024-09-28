@@ -48,3 +48,53 @@ The goal of One Big Dark Room is to provide an intuitive platform where users ca
   * Advanced search functionality for filtering band listings by genre, location, or other criteria.
   * Enhanced profile pages for band creators to showcase their previous projects.
   * Notification systems to alert users of new listings matching their preferences.
+
+### Colour Scheme
+
+The One Big Dark Room project utilizes a carefully chosen color scheme to enhance readability, user engagement, and ease of navigation. The color palette is simple yet effective, creating a clean and modern aesthetic.
+
+#### Primary Background Color:
+
+- The overall background is a dark shade that provides a sleek, modern look, evoking a professional and focused atmosphere. This dark theme helps other elements stand out while reducing eye strain during prolonged use.
+
+#### Text Colors:
+
+- The default text color is white, ensuring high contrast against the dark background for easy readability.
+
+#### Hover Effects: 
+
+- Interactive elements, such as buttons and message alerts, utilize hover effects with color shifts to signal interactivity.
+
+#### Buttons and Alerts:
+
+- Important actions like creating a listing or confirming actions (such as deletion) are styled with buttons that use clear, distinguishable colors, typically leaning towards neutral or dark themes to maintain consistency with the overall design. The modal confirmation buttons (like the 'Yes' button) are styled without extra borders to create a clean appearance.
+
+#### Visual Alerts:
+
+- New messages in the inbox are marked with a red alert icon, ensuring that users can quickly identify pending actions or notifications.
+
+This color scheme balances functionality with aesthetics, ensuring a visually pleasing experience without overwhelming the user with bright or excessive color variations.
+
+### Typography
+
+One Big Dark Room uses a clean and modern Palanquin Dark font throughout the application. The typography is designed to be minimal and readable, complementing the dark-themed background. Headings and important elements are slightly larger to establish hierarchy, while body text remains simple and easy to scan, ensuring a user-friendly reading experience across all devices.
+
+- [Palanquin Dark](https://fonts.google.com/specimen/Palanquin Dark) was used for the primary headers and titles.
+
+## User Stories
+
+### Site Users
+
+- As a Site User I can see a paginated view of all published band listings so that I can quickly search for ones that appeal to me.
+- As a Site User I can open an individual band listing so that I can read the full text of the listing.
+- As a Site User I can create a user account so that I can use the full features of the site.
+- As a Site User I can create a band listing so that I can connect with the community of other musicians on the site.
+- As a Site User I can edit or delete my band listing so that my listing is always accurate/up-to-date, or removed from the site.
+- As a Site User I can message an artist via their band listing so that I can propose a collaboration.
+- As a Site User I can receive messages from other users so that I can communicate with them about possible collaborations.
+- As a Site User I can reply to messages so that I can respond to and interact with other users.
+
+### Site Admin
+
+- As a Site Administrator I can create, read, update, and delete band listings so that I can manage the content of my site.
+- As a Site Administrator I can create draft band listings so that I can complete the band listing at a later time.
