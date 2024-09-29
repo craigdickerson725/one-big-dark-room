@@ -70,3 +70,23 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 |  | manage.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/manage.py) | ![screenshot](documentation/validation/screenshot15.png) | |
 | onebigdarkroom | settings.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/onebigdarkroom/settings.py) | ![screenshot](documentation/validation/screenshot16.png) | |
 | onebigdarkroom | urls.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/onebigdarkroom/urls.py) | ![screenshot](documentation/validation/screenshot17.png) | |
+
+## Browser Compatibility
+
+I've tested my deployed project on multiple browsers to check for compatibility issues.
+
+| Browser | Home | About | Contact | etc | Notes |
+| --- | --- | --- | --- | --- | --- |
+| Chrome | ![screenshot](documentation/browsers/browser-chrome-home.png) | ![screenshot](documentation/browsers/browser-chrome-login.png) | ![screenshot](documentation/browsers/browser-chrome-signup.png) | ![screenshot](documentation/browsers/browser-chrome-create.png) | ![screenshot](documentation/browsers/browser-chrome-inbox.png) | ![screenshot](documentation/browsers/browser-chrome-logout.png) | Works as expected |
+| Firefox | ![screenshot](documentation/browsers/browser-firefox-home.png) | ![screenshot](documentation/browsers/browser-firefox-login.png) | ![screenshot](documentation/browsers/browser-firefox-signup.png) | ![screenshot](documentation/browsers/browser-firefox-create.png) | ![screenshot](documentation/browsers/browser-firefox-inbox.png) | ![screenshot](documentation/browsers/browser-firefox-logout.png) | Works as expected |
+| Edge | ![screenshot](documentation/browsers/browser-edge-home.png) | ![screenshot](documentation/browsers/browser-edge-login.png) | ![screenshot](documentation/browsers/browser-edge-signup.png) | ![screenshot](documentation/browsers/browser-edge-create.png) | ![screenshot](documentation/browsers/browser-edge-inbox.png) | ![screenshot](documentation/browsers/browser-edge-logout.png) | Works as expected |
+
+## Responsiveness
+
+I've tested my deployed project on multiple devices to check for responsiveness issues.
+
+| Device | Home | About | Contact | etc | Notes |
+| --- | --- | --- | --- | --- | --- |
+| Mobile (DevTools) | ![screenshot](documentation/responsiveness/responsive-mobile-home.png) | ![screenshot](documentation/responsiveness/responsive-mobile-login.png) | ![screenshot](documentation/responsiveness/responsive-mobile-signup.png) | ![screenshot](documentation/responsiveness/responsive-mobile-create.png) | ![screenshot](documentation/responsiveness/responsive-mobile-inbox.png) | ![screenshot](documentation/responsiveness/responsive-mobile-logout.png) | Works as expected |
+| Tablet (DevTools) | ![screenshot](documentation/responsiveness/responsive-tablet-home.png) | ![screenshot](documentation/responsiveness/responsive-tablet-login.png) | ![screenshot](documentation/responsiveness/responsive-tablet-signup.png) | ![screenshot](documentation/responsiveness/responsive-tablet-create.png) | ![screenshot](documentation/responsiveness/responsive-tablet-inbox.png) | ![screenshot](documentation/responsiveness/responsive-tablet-logout.png) | Works as expected |
+| Desktop | ![screenshot](documentation/responsiveness/responsive-desktop-home.png) | ![screenshot](documentation/responsiveness/responsive-desktop-login.png) | ![screenshot](documentation/responsiveness/responsive-desktop-signup.png) | ![screenshot](documentation/responsiveness/responsive-desktop-create.png) | ![screenshot](documentation/responsiveness/responsive-desktop-inbox.png) | ![screenshot](documentation/responsiveness/responsive-desktop-logout.png) | Works as expected |
