@@ -487,3 +487,69 @@ You can fork this repository by using the following steps:
 ### Local VS Deployment
 
 I have not found any noticeable differences between the deployed version and local version of the One Big Dark Room project.
+
+## Credits
+
+### Content
+
+| Source | Location | Notes |
+| --- | --- | --- |
+| [Markdown Builder](https://tim.2bn.dev/markdown-builder) | README and TESTING | tool to help generate the Markdown files |
+| [Chris Beams](https://chris.beams.io/posts/git-commit) | version control | "How to Write a Git Commit Message" |
+| [W3Schools](https://www.w3schools.com/bootstrap5/) | bootstrap 5 tutorial | main layout and design for website |
+| [Bootstrap](https://getbootstrap.com/docs/5.1/components/modal/) | components page | modal design |
+| [WhiteNoise](http://whitenoise.evans.io) | entire site | hosting static files on Heroku temporarily |
+
+In addition to the resources listed above, I have to give a special mention to my mentor, Tim Nelson, who helped me to correct an issue with deleting messages.  The issue itself will be explained more in the TESTING.md file.  But specifically, the following code snippet that helped correct things is as follows:
+
+Function for allowing a sender to delete a message
+
+``` python
+def delete_by_sender(request, id):
+    message = get_object_or_404(Message, id=id)
+    if not message.sender == request.user:
+        messages.error(request, "You cannot delete this message.")
+        return redirect('messages')
+    if message.deleted_by_recipient:
+        message.delete()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+    else:
+        message.deleted_by_sender = True
+        message.save()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+```
+
+Function for allowing a recipient to delete a message
+
+``` python
+def delete_by_recipient(request, id):
+    message = get_object_or_404(Message, id=id)
+    if not message.recipient == request.user:
+        messages.error(request, "You cannot delete this message.")
+        return redirect('messages')
+    if message.deleted_by_sender:
+        message.delete()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+    else:
+        message.deleted_by_recipient = True
+        message.save()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('messages')
+```
+
+### Media
+
+The photos for the band pages (except the Ghosts Over Dresden band image) are license-free, and taken from Wallpaper Access.  There is not an individual link for every image--instead they all appear on the same page and can be scrolled through.  Clicking on 'download image' simply downloads the image to your default downloads folder.  The Wallpaper Access site will be listed below, and all images can be seen there.  The Ghosts Over Dresden band image was created by Bea Keller and Cindy Wagner, independent graphic artists, who created it specifically for me.
+
+| Source | Location | Type | Notes |
+| --- | --- | --- | --- |
+| [Wallpaper Access](https://wallpaperaccess.com/cyberpunk-synthwave) | cyperpunk-synthwave page | images | band images for band listings |
+
+### Acknowledgements
+
+- I would like to thank my Code Institute mentor, [Tim Nelson](https://github.com/TravelTimN) for his support throughout the development of this project, I would not have gotten this far not only in this project, but in this course as a whole, without his help.
+- I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com) for the moral support; it kept me going during periods of self doubt and imposter syndrome.
+- I would like to thank my wife Julia and my daughter Fini, for believing in me, and allowing me to make this transition into software development.
