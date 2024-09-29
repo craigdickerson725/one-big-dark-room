@@ -105,7 +105,7 @@ To follow best practice, wireframes were developed for mobile, and desktop sizes
 I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wireframes.
 
 <details>
-<summary> Click here to see the Mobile Wireframes </summary>
+<summary> Click here to see the Wireframes </summary>
 
 Home
   - ![screenshot](documentation/wireframes/wireframe01.png)
@@ -126,3 +126,114 @@ Inbox
   - ![screenshot](documentation/wireframes/wireframe03.png)
 
 </details>
+
+## Features
+
+### Existing Features
+
+- **Paginated Band Listings**
+
+    - Users can view a paginated list of all published band listings, allowing them to easily browse through available opportunities and quickly find listings that interest them.
+
+![screenshot](documentation/features/feature01.png)
+
+- **Individual Band Listing View**
+
+    - Each band listing can be opened to display the full content, providing detailed information for users to consider before deciding to reach out.
+
+![screenshot](documentation/features/feature02.png)
+
+- **User Account, Band Listing, and Message Management**
+
+    - Site administrators have full control over user accounts, band listings, and messages including the ability to create, read, update, and delete listings, ensuring that the content remains relevant and up-to-date.  This also helps administrators to remove undesired content.
+
+![screenshot](documentation/features/feature03a.png)
+
+![screenshot](documentation/features/feature03b.png)
+
+![screenshot](documentation/features/feature03c.png)
+
+![screenshot](documentation/features/feature03d.png)
+
+- **Draft Band Listings**
+
+    - Administrators can create draft versions of band listings and complete them at a later time, giving flexibility in managing content creation.
+
+![screenshot](documentation/features/feature04.png)
+
+- **User Account Registration**
+
+    - Users can register for an account, which allows them to log in, create band listings, and message other users.
+
+![screenshot](documentation/features/feature05a.png)
+
+![screenshot](documentation/features/feature05b.png)
+
+- **Create a Band Listing**
+
+    - Logged-in users can create their own band listings, which will be displayed on the site once approved, enabling musicians to connect and collaborate.
+
+![screenshot](documentation/features/feature06.png)
+
+- **Edit or Delete Band Listings**
+
+    - Users can edit or delete their own band listings to keep information current or remove outdated entries.
+
+![screenshot](documentation/features/feature07a.png)
+
+![screenshot](documentation/features/feature07b.png)
+
+![screenshot](documentation/features/feature07c.png)
+
+- **Message Artists through Band Listings**
+
+    - Users can send messages to artists directly through their band listings to propose collaborations or inquire about opportunities.
+
+![screenshot](documentation/features/feature08a.png)
+
+![screenshot](documentation/features/feature08b.png)
+
+![screenshot](documentation/features/feature08c.png)
+
+- **Receive and Manage Messages**
+
+    - Users are notified when they receive a message and can read messages in their inbox.
+
+![screenshot](documentation/features/feature09a.png)
+
+![screenshot](documentation/features/feature09b.png)
+
+![screenshot](documentation/features/feature09c.png)
+
+- **Reply to Messages**
+
+    - Users can respond to incoming messages to continue conversations, facilitating back-and-forth communication.
+
+![screenshot](documentation/features/feature10a.png)
+
+![screenshot](documentation/features/feature10b.png)
+
+![screenshot](documentation/features/feature10c.png)
+
+- **Delete Messages from Inbox**
+
+    - Users can delete messages from both their inbox and outbox, allowing them to manage and organize their conversations as needed.
+
+![screenshot](documentation/features/feature11a.png)
+
+![screenshot](documentation/features/feature11b.png)
+
+### Future Features
+
+- Comment on Band Listings
+    - Users will be able to comment on band listings, allowing them to engage in conversations directly within the listing. This feature will support threaded discussions to enhance user interaction.
+- Social Media Login Integration
+    - Users will have the option to sign in using their existing social media accounts (e.g., Facebook, Instagram), streamlining the registration process and reducing the need to create a separate account for the site.
+- Username Search
+    - A search function will allow users to find other members by their username. This feature will help users locate specific profiles or band listings more easily, fostering connections within the community.
+
+- Password Reset Functionality
+    - A password recovery option will be implemented, enabling users to reset their password via email in case they forget it. This ensures users can regain access to their accounts seamlessly.
+
+- Account Deletion
+    - Users will be able to delete their accounts, removing all associated data, including their band listings and personal information, from the site.
