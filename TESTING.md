@@ -30,3 +30,43 @@ To this end, each feature has been thoroughly tested to confirm that it works as
 
 - User Feedback Incorporation
     - User feedback played a crucial role in enhancing the overall user experience. Any issues or suggestions raised by users were evaluated, and improvements were made where necessary to ensure the site meets user expectations.
+
+## Code Validation
+
+### HTML
+
+I have used the recommended [HTML W3C Validator](https://validator.w3.org) to validate all of my HTML files.
+
+| Directory | File | Screenshot | Notes |
+| --- | --- | --- | --- |
+| band_listing | bandlisting_detail.html | ![screenshot](documentation/validation/screenshot01.png) | |
+| band_listing | create_listing.html | ![screenshot](documentation/validation/screenshot02.png) | |
+| band_listing | edit_listing.html | ![screenshot](documentation/validation/screenshot03.png) | |
+| band_listing | index.html | ![screenshot](documentation/validation/screenshot04.png) | |
+| band_listing | message_detail.html | ![screenshot](documentation/validation/screenshot05.png) | |
+| band_listing | messages.html | ![screenshot](documentation/validation/screenshot06.png) | |
+| band_listing | send_message.html | ![screenshot](documentation/validation/screenshot07.png) | |
+
+### CSS
+
+I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator) to validate all of my CSS files.
+
+| Directory | File | Screenshot | Notes |
+| --- | --- | --- | --- |
+| static | style.css | ![screenshot](documentation/validation/screenshot08.png) | |
+
+### Python
+
+I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate all of my Python files.
+
+| Directory | File | CI URL | Screenshot | Notes |
+| --- | --- | --- | --- | --- |
+| band_listing | admin.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/admin.py) | ![screenshot](documentation/validation/screenshot09.png) | |
+| band_listing | context_processors.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/context_processors.py) | ![screenshot](documentation/validation/screenshot10.png) | |
+| band_listing | forms.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/forms.py) | ![screenshot](documentation/validation/screenshot11.png) | |
+| band_listing | models.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/models.py) | ![screenshot](documentation/validation/screenshot12.png) | |
+| band_listing | urls.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/urls.py) | ![screenshot](documentation/validation/screenshot13.png) | |
+| band_listing | views.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/views.py) | ![screenshot](documentation/validation/screenshot14.png) | |
+|  | manage.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/manage.py) | ![screenshot](documentation/validation/screenshot15.png) | |
+| onebigdarkroom | settings.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/onebigdarkroom/settings.py) | ![screenshot](documentation/validation/screenshot16.png) | |
+| onebigdarkroom | urls.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/onebigdarkroom/urls.py) | ![screenshot](documentation/validation/screenshot17.png) | |

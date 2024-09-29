@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView  # noqa
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -9,24 +9,28 @@ from django.db.models import Q
 from .forms import BandListingForm, MessageForm
 from .models import BandListing, Message
 
+
 # View for displaying the list of band listings
 class BandListingList(generic.ListView):
-    queryset = BandListing.objects.filter(status=1)  # Show only 'Published' listings
+    # Show only 'Published' listings
+    queryset = BandListing.objects.filter(status=1)
     template_name = 'band_listing/index.html'
     paginate_by = 6  # Pagination, 6 listings per page
 
     def get_context_data(self, **kwargs):
-        # Add additional context data: 'band_listings' will refer to the list of objects
+        # 'band_listings' will refer to the list of objects
         context = super().get_context_data(**kwargs)
         context['band_listings'] = context['object_list']
         return context
+
 
 # View for creating a new band listing
 class CreateListingView(LoginRequiredMixin, CreateView):
     model = BandListing
     form_class = BandListingForm
     template_name = 'band_listing/create_listing.html'
-    success_url = reverse_lazy('index')  # Redirect to index page after successful creation
+    # Redirect to index page after successful creation
+    success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         # Automatically set the creator and status of the band listing
@@ -36,11 +40,12 @@ class CreateListingView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
-        # Ensure the user is authenticated before allowing them to create a listing
+        # Ensure the user is authenticated
         if not request.user.is_authenticated:
-            messages.error(request, 'You must be logged in to create a band listing.')
+            messages.error(request, 'You must be logged in to create a band listing.')  # noqa
             return redirect('account_login')
         return super().dispatch(request, *args, **kwargs)
+
 
 # View for displaying details of a single band listing
 class BandListingDetail(generic.DetailView):
@@ -54,18 +59,21 @@ class BandListingDetail(generic.DetailView):
 
         # Check if the band listing has a photo, otherwise use a default image
         if not band_listing.photo:
-            context['default_photo'] = 'images/default-image.jpg'  # Default image path
+            # Default image path
+            context['default_photo'] = 'images/default-image.jpg'
         else:
             context['default_photo'] = band_listing.photo.url
 
         return context
+
 
 # View for editing an existing band listing
 class EditListingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BandListing
     form_class = BandListingForm
     template_name = 'band_listing/edit_listing.html'
-    success_url = reverse_lazy('index')  # Redirect to index page after successful editing
+    # Redirect to index page after successful editing
+    success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         # Ensure the listing is updated by the user who created it
@@ -78,10 +86,12 @@ class EditListingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         listing = self.get_object()
         return self.request.user == listing.created_by
 
+
 # View for deleting a band listing
 class DeleteListingView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = BandListing
-    success_url = reverse_lazy('index')  # Redirect to index page after deletion
+    # Redirect to index page after deletion
+    success_url = reverse_lazy('index')
 
     def test_func(self):
         # Check if the logged-in user is the creator of the listing
@@ -92,6 +102,7 @@ class DeleteListingView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         # Confirm deletion with a success message
         messages.success(self.request, 'Band listing successfully deleted.')
         return super().post(request, *args, **kwargs)
+
 
 # View for sending messages to the creator of a band listing
 class SendMessageView(LoginRequiredMixin, FormView):
@@ -112,8 +123,9 @@ class SendMessageView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         # Include the band listing in the context
         context = super().get_context_data(**kwargs)
-        context['band_listing'] = get_object_or_404(BandListing, slug=self.kwargs['slug'])
+        context['band_listing'] = get_object_or_404(BandListing, slug=self.kwargs['slug'])  # noqa
         return context
+
 
 # View for showing both inbox and outbox messages for the user
 class MessagesView(LoginRequiredMixin, generic.TemplateView):
@@ -123,11 +135,12 @@ class MessagesView(LoginRequiredMixin, generic.TemplateView):
         # Separate the inbox and outbox messages
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context['inbox_messages'] = Message.objects.filter(recipient=user, deleted_by_recipient=False).order_by('-timestamp')
-        context['outbox_messages'] = Message.objects.filter(sender=user, deleted_by_sender=False).order_by('-timestamp')
+        context['inbox_messages'] = Message.objects.filter(recipient=user, deleted_by_recipient=False).order_by('-timestamp')  # noqa
+        context['outbox_messages'] = Message.objects.filter(sender=user, deleted_by_sender=False).order_by('-timestamp')  # noqa
         # Add a count of unread messages for the inbox alert
-        context['unread_count'] = Message.objects.filter(recipient=user, is_read=False).count()
+        context['unread_count'] = Message.objects.filter(recipient=user, is_read=False).count()  # noqa
         return context
+
 
 # View for reading and replying to a specific message
 class MessageDetailView(LoginRequiredMixin, generic.DetailView):
@@ -158,7 +171,9 @@ class MessageDetailView(LoginRequiredMixin, generic.DetailView):
             messages.success(request, 'Reply sent successfully.')
             return redirect('messages')
         messages.error(request, 'There was an error sending your reply.')
-        return self.render_to_response({'form': form, 'original_message': self.object})
+        return self.render_to_response({
+            'form': form, 'original_message': self.object})
+
 
 # Function for allowing a sender to delete a message
 def delete_by_sender(request, id):
@@ -175,6 +190,7 @@ def delete_by_sender(request, id):
         message.save()
         messages.success(request, "Message deleted successfully.")
         return redirect('messages')
+
 
 # Function for allowing a recipient to delete a message
 def delete_by_recipient(request, id):
