@@ -103,3 +103,61 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 | Create | ![screenshot](documentation/lighthouse/lighthouse-create-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-create-desktop.png) | Some minor warnings |
 | Inbox | ![screenshot](documentation/lighthouse/lighthouse-inbox-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-inbox-desktop.png) | Some minor warnings |
 | Logout | ![screenshot](documentation/lighthouse/lighthouse-logout-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-logout-desktop.png)
+
+## Defensive Programming
+
+In the One Big Dark Room project, defensive programming practices are implemented to ensure the application remains robust and handles errors gracefully. Several strategies have been used across views, forms, and models to prevent potential issues such as invalid inputs, unauthorized access, or system failures.
+
+- Form Validation
+	- BandListingForm and MessageForm both include validation logic to ensure that required fields are populated and data is in 	the expected format.
+		- For example, the band_name field in the BandListingForm is required, and if it is missing, the form will return an 		error rather than allowing invalid data into the system.
+		- Similarly, the message_body field in the MessageForm ensures that no empty messages can be submitted by users.
+	- Unit tests have been written to cover various scenarios:
+		- Forms with missing or invalid data are correctly identified as invalid.
+		- Valid data (including optional fields like snippet or an image upload) is accepted.
+- View-Level Protections
+	- Views are protected to ensure that only authenticated users can access certain pages like creating, editing, or deleting  	listings. Unauthorized users are redirected appropriately.
+	- For example, tests ensure that if a user attempts to create or edit a band listing without being logged in, they are 	redirected to the login page.
+	- Additionally, views that perform CRUD operations on the BandListing model (e.g., edit_listing and delete_listing) check  	whether the logged-in user has permission to modify the resource, ensuring that only the listing's creator can make changes.
+- Database Integrity
+	- In the BandListing and Message models, Django’s built-in validations, such as required fields and foreign key 	relationships, prevent invalid data from being saved to the database.
+	- For example, BandListing ensures that each band has a unique slug, and the Message model prevents the creation of messages 	without a sender, recipient, or associated listing.
+	- Unit tests verify the proper creation, updating, and deletion of model instances, ensuring data integrity.
+- Graceful Handling of Missing Data
+	- In views and templates, missing data is handled gracefully:
+		- For instance, when a band listing does not include a photo, the template falls back to a default image rather than 		breaking.
+		- The pagination controls ensure that users cannot navigate to non-existent pages (e.g., previous or next links are 		disabled when on the first or last page, respectively).
+		- Tests verify that the application properly handles empty data states, such as no band listings being available.
+- Error Feedback and User-Friendly Responses
+	- Error messages are displayed to users when something goes wrong, such as submitting invalid form data. These errors are 	clearly indicated in forms, helping users correct their inputs.
+	- Tests are in place to confirm that the appropriate error messages are shown when forms are submitted with invalid data.
+    
+By combining these defensive strategies with thorough testing, the One Big Dark Room project is designed to be resilient to unexpected inputs and conditions, ensuring a reliable and user-friendly experience.
+
+Defensive programming was manually tested with the below user acceptance testing:
+
+| Page | Expectation | Test | Result | Fix | Screenshot |
+| --- | --- | --- | --- | --- | --- |
+| Home | | | | | |
+| | Band listings should display correctly, including band photo, name, and snippet | Navigated to the home page | Band listings appeared with the correct details and placeholder image where no photo is uploaded | Test concluded and passed | ![screenshot](documentation/features/feature01x.png) |
+| | Pagination should allow navigating through pages of band listings | Clicked 'Next' and 'Previous' pagination links | Pagination worked as expected, displaying the correct listings for each page | Test concluded and passed | ![screenshot](documentation/features/feature02x.png) |
+| Login | | | | | |
+| | Users should be able to log in with valid credentials | Entered valid username and password and submitted form | Login succeeded, and the user was redirected to the home page | Test concluded and passed | ![screenshot](documentation/features/feature03x.png) |
+| | Error message should display for invalid credentials | Entered invalid username/password and submitted form | An error message appeared as expected | Test concluded and passed | ![screenshot](documentation/features/feature04x.png) |
+| Sign Up | | | | | |
+| | Users should be able to sign up with valid details | Entered valid signup details | Signup succeeded, and the user was redirected to the home page | Test concluded and passed | ![screenshot](documentation/features/feature05x.png) |
+| | Error message should display for invalid or missing details | Left required fields empty and submitted form | The form displayed validation errors as expected | Test concluded and passed | ![screenshot](documentation/features/feature06x.png) |
+| Create Listing | | | | | |
+| | Users should be able to create a band listing with valid details | Submitted the form with valid data | The listing was created successfully, and I was redirected to the band detail page | Test concluded and passed | ![screenshot](documentation/features/feature07x.png) |
+| | Error message should display for missing required fields | Submitted form without 'band_name' | An error message appeared as expected | Test concluded and passed | ![screenshot](documentation/features/feature08x.png) |
+| Edit Listing | | | | | |
+| | Users should be able to edit their band listing details | Tested the feature by doing Y | The listing was updated successfully | Test concluded and passed | ![screenshot](documentation/features/feature09x.png) |
+| | Error message should display for invalid input | Submitted form with invalid data | Error message displayed for invalid fields | Test concluded and passed | ![screenshot](documentation/features/feature10x.png) |
+| Send Message | | | | | |
+| | Users should be able to send messages from a band listing page | Sent a valid message from a band listing | Message was sent, and I was redirected to the messages page | Test concluded and passed | ![screenshot](documentation/features/feature11x.png) |
+| | Error message should display for empty message body | Submitted form with an empty message body | Error message displayed as expected | Test concluded and passed | ![screenshot](documentation/features/feature12x.png) |
+| Inbox | | | | | |
+| | Inbox should display received messages correctly | Navigated to the inbox | Messages were displayed with correct details | Test concluded and passed | ![screenshot](documentation/features/feature13x.png) |
+| | Unread messages should appear with a dark red background | Checked inbox for unread messages | Unread messages had the correct styling with a dark red background | Test concluded and passed | ![screenshot](documentation/features/feature14x.png) |
+| Logout | | | | | |
+| | User should be logged out and redirected to the login page | Clicked the 'Logout' link | Logout succeeded, and I was redirected to the login page | Test concluded and passed | ![screenshot](documentation/features/feature15x.png) |

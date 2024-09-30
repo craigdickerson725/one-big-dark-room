@@ -287,6 +287,52 @@ INSTALLED_APPS = [
 ![erd](documentation/erd.png)
 source: [medium.com](https://medium.com/@yathomasi1/1-using-django-extensions-to-visualize-the-database-diagram-in-django-application-c5fa7e710e16)
 
+I have also used Mermaid to generate an interactive ERD of my models.
+
+```mermaid
+erDiagram
+    USER {
+        int id PK
+        string username
+        string password
+        string email
+        string first_name
+        string last_name
+    }
+
+    BANDLISTING {
+        int id PK
+        string band_name
+        string slug
+        string photo
+        string description
+        datetime created_at
+        datetime updated_on
+        int status
+        text snippet
+        int created_by FK
+    }
+
+    MESSAGE {
+        int id PK
+        int sender FK
+        int recipient FK
+        int band_listing FK
+        text message_body
+        datetime timestamp
+        boolean is_read
+        boolean deleted_by_sender
+        boolean deleted_by_recipient
+    }
+
+    USER ||--o{ BANDLISTING : created_by
+    BANDLISTING ||--o{ MESSAGE : messages
+    USER ||--o{ MESSAGE : sent_messages
+    USER ||--o{ MESSAGE : received_messages
+```
+
+Source [Mermaid](https://mermaid.live/edit#pako:eNqNU11vozAQ_CvIz0lEKd9vrZqrql6rqty9nJCQgzfEOrCRbdqmaf77bSCUJES9-gGtZta7s8N6Q3LJgMQE1A2nhaJVKiw8v5P5s7Xp4t3hwlicWU_3A6SN4qKwGg1K0ApGRE21fpWKjQioKC9H6JIrbbKzlUp6xGxT0QXXV483P--SX3ePt9_TuqCCnW-hy6YYT7CSRo5QBjpXvDZcioFj1IDhFVi5AgxZRs0ZsqlZSx7e3KnVhppGD5iBNwQFr2swx5l9-cXa-nF_YsfDPEmubuf_saLtB4KB-qzQwwpyXnPA6JRpjSu5NjsDDslWaQVa0wKyhWTrM1PvPjhhVQ_cQsoSqLC4znAgNiYYlNDNmXViv0z5FH7iSLvFHx_TqdwcLUt84ON4lfYXejvjfj49LjrkoEqTfScRtQJ_wdZ9MpmQChS-CYbPsP13KTErwCUlMYaMqr8pScUW82hjZLIWOYmNamBCun3aP1wSL2mpEa2pIPGGvJHYsS9mjud4bmjbdoAnnJA1wsEs9G33wo2i4DKwXc_bTsi7lFjCnkWOHwaeG_l-5IeXTtTW-9OSXVMlm2K1b7b9B2MjSlQ)
+
 ## Agile Development Process
 
 ### GitHub Projects
