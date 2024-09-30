@@ -176,3 +176,19 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Custom 404 page should have a link to return to the home page | Checked for the 'Return to Home' link on the 404 page | Link was present and functioned as expected | Test concluded and passed | ![screenshot](documentation/features/feature20x.png) |
 | Logout | | | | | |
 | | User should be logged out and redirected to the login page | Clicked the 'Logout' link | Logout succeeded, and I was redirected to the login page | Test concluded and passed | ![screenshot](documentation/features/feature21x.png) |
+
+## User Story Testing
+
+| User Story | Screenshot |
+| --- | --- |
+| As a Site User I can see a paginated view of all published band listings so that I can quickly search for ones that appeal to me. | ![screenshot](documentation/features/feature01.png) |
+| As a Site User I can open an individual band listing so that I can read the full text of the listing. | ![screenshot](documentation/features/feature02.png) |
+| As a Site User I can create a user account so that I can use the full features of the site. | ![screenshot](documentation/features/feature05a.png) |
+| As a Site User I can create a band listing so that I can connect with the community of other musicians on the site. | ![screenshot](documentation/features/feature06.png) |
+| As a Site User I can edit or delete my band listing so that my listing is always accurate/up-to-date, or removed from the site. | ![screenshot](documentation/features/feature07b.png) |
+| As a Site User I can message an artist via their band listing so that I can propose a collaboration. | ![screenshot](documentation/features/feature08b.png) |
+| As a Site User I can receive messages from other users so that I can communicate with them about possible collaborations. | ![screenshot](documentation/features/feature09b.png) |
+| As a Site User I can reply to messages so that I can respond to and interact with other users. | ![screenshot](documentation/features/feature10a.png) |
+| As a Site Administrator I can create, read, update, and delete band listings so that I can manage the content of my site. | ![screenshot](documentation/features/feature03a.png) |
+| As a Site Administrator I can create draft band listings so that I can complete the band listing at a later time. | ![screenshot](documentation/features/feature04.png) |
+| As a Site User I can delete the messages in my inbox and outbox so that I can clear out messages that I no longer need. | ![screenshot](documentation/features/feature11a.png) |
