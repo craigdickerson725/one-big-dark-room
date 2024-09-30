@@ -192,3 +192,69 @@ Defensive programming was manually tested with the below user acceptance testing
 | As a Site Administrator I can create, read, update, and delete band listings so that I can manage the content of my site. | ![screenshot](documentation/features/feature03a.png) |
 | As a Site Administrator I can create draft band listings so that I can complete the band listing at a later time. | ![screenshot](documentation/features/feature04.png) |
 | As a Site User I can delete the messages in my inbox and outbox so that I can clear out messages that I no longer need. | ![screenshot](documentation/features/feature11a.png) |
+
+## Automated Testing
+
+I have conducted a series of automated tests on my application.
+
+I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
+
+### Python (Unit Testing)
+
+I have used Django's built-in unit testing framework to test the application functionality.
+
+In order to run the tests, I ran the following command in the terminal:
+
+`python3 manage.py test band_listing`
+
+To create the coverage report, I would then run the following commands:
+
+`pip3 install coverage`
+
+`pip3 freeze --local > requirements.txt`
+
+`coverage run --omit=*/site-packages/*,*/migrations/*,*/__init__.py,env.py manage.py test`
+
+`coverage report`
+
+To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
+
+`coverage html`
+
+`python3 -m http.server`
+
+Below are the results from the various apps on my application that I've tested:
+
+| App/Folder | File | Coverage | Screenshot |
+| --- | --- | --- | --- |
+| band_listing | admin.py  | 95% | ![screenshot](documentation/tests/py-test01.png) |
+| band_listing | apps.py | 100% | ![screenshot](documentation/tests/py-test02.png) |
+| band_listing | context_processors.py | 100% | ![screenshot](documentation/tests/py-test03.png) |
+| band_listing | forms.py | 100% | ![screenshot](documentation/tests/py-test04.png) |
+| band_listing | models.py | 86% | ![screenshot](documentation/tests/py-test05.png) |
+| band_listing | tests/test_forms.py | 98% | ![screenshot](documentation/tests/py-test06.png) |
+| band_listing | tests/test_views.py | 100% | ![screenshot](documentation/tests/py-test07.png) |
+| band_listing | urls.py | 100% | ![screenshot](documentation/tests/py-test08.png) |
+| band_listing | views.py | 70% | ![screenshot](documentation/tests/py-test09.png) |
+|              | manage.py | 82% | ![screenshot](documentation/tests/py-test10.png) |
+| onebigdarkroom | settings.py | 100% | ![screenshot](documentation/tests/py-test11.png) |
+| onebigdarkroom | urls.py | 100% | ![screenshot](documentation/tests/py-test12.png) |
+| onebigdarkroom | views.py | 67% | ![screenshot](documentation/tests/py-test13.png) |
+
+#### Unit Test Issues
+
+While I  made plenty of syntax errors writing the unit tests, they were all resolved by catching my own small coding errors.  In the end, all of the tests passed repeatedly, so no issues in terms of actual testing were discovered.
+
+## Bugs
+
+The only known bug with the application is a well-known error caused by the allauth authentication system in Django, which appears on the Sign Up page.  This was caught in the validation process, and confirmed to me by my mentor, Tim Nelson.
+
+![screenshot](documentation/validation/screenshot-signup.png)
+
+## Unfixed Bugs
+
+The only bug that I am aware of is the above mentioned 'allauth' error on the Sign Up page.  While this bug remains unfixed, it does not disrupt the functionality of the signup process, so it will remain unnoticed by users.
+
+
+> [!NOTE]  
+> There are no remaining bugs that I am aware of.

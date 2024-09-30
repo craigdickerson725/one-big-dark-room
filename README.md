@@ -93,6 +93,7 @@ One Big Dark Room uses a clean and modern Palanquin Dark font throughout the app
 - As a Site User I can message an artist via their band listing so that I can propose a collaboration.
 - As a Site User I can receive messages from other users so that I can communicate with them about possible collaborations.
 - As a Site User I can reply to messages so that I can respond to and interact with other users.
+- As a Site User I can delete the messages in my inbox and outbox so that I can clear out messages that I no longer need.
 
 ### Site Admin
 
