@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import handler404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,3 +24,5 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('', include('band_listing.urls')),  # Include the band_listing URLs
 ]
+
+handler404 = "onebigdarkroom.views.handler404"
