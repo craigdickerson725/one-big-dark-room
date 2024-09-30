@@ -90,3 +90,16 @@ I've tested my deployed project on multiple devices to check for responsiveness 
 | Mobile (DevTools) | ![screenshot](documentation/responsiveness/responsive-mobile-home.png) | ![screenshot](documentation/responsiveness/responsive-mobile-login.png) | ![screenshot](documentation/responsiveness/responsive-mobile-signup.png) | ![screenshot](documentation/responsiveness/responsive-mobile-create.png) | ![screenshot](documentation/responsiveness/responsive-mobile-inbox.png) | ![screenshot](documentation/responsiveness/responsive-mobile-logout.png) | Works as expected |
 | Tablet (DevTools) | ![screenshot](documentation/responsiveness/responsive-tablet-home.png) | ![screenshot](documentation/responsiveness/responsive-tablet-login.png) | ![screenshot](documentation/responsiveness/responsive-tablet-signup.png) | ![screenshot](documentation/responsiveness/responsive-tablet-create.png) | ![screenshot](documentation/responsiveness/responsive-tablet-inbox.png) | ![screenshot](documentation/responsiveness/responsive-tablet-logout.png) | Works as expected |
 | Desktop | ![screenshot](documentation/responsiveness/responsive-desktop-home.png) | ![screenshot](documentation/responsiveness/responsive-desktop-login.png) | ![screenshot](documentation/responsiveness/responsive-desktop-signup.png) | ![screenshot](documentation/responsiveness/responsive-desktop-create.png) | ![screenshot](documentation/responsiveness/responsive-desktop-inbox.png) | ![screenshot](documentation/responsiveness/responsive-desktop-logout.png) | Works as expected |
+
+## Lighthouse Audit
+
+I've tested my deployed project using the Lighthouse Audit tool to check for any major issues.
+
+| Page | Mobile | Desktop | Notes |
+| --- | --- | --- | --- |
+| Home | ![screenshot](documentation/lighthouse/lighthouse-home-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-home-desktop.png) | Some minor warnings |
+| Login | ![screenshot](documentation/lighthouse/lighthouse-login-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-login-desktop.png) | Some minor warnings |
+| Signup | ![screenshot](documentation/lighthouse/lighthouse-signup-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-signup-desktop.png) | Some minor warnings |
+| Create | ![screenshot](documentation/lighthouse/lighthouse-create-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-create-desktop.png) | Some minor warnings |
+| Inbox | ![screenshot](documentation/lighthouse/lighthouse-inbox-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-inbox-desktop.png) | Some minor warnings |
+| Logout | ![screenshot](documentation/lighthouse/lighthouse-logout-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-logout-desktop.png)
