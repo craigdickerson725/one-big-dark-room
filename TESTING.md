@@ -46,6 +46,12 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org) to va
 | band_listing | message_detail.html | ![screenshot](documentation/validation/screenshot05.png) | |
 | band_listing | messages.html | ![screenshot](documentation/validation/screenshot06.png) | |
 | band_listing | send_message.html | ![screenshot](documentation/validation/screenshot07.png) | |
+| band_listing | 404.html | ![screenshot](documentation/validation/screenshot404.png) | |
+| band_listing | login.html | ![screenshot](documentation/validation/screenshot-login.png) | |
+| band_listing | logout.html | ![screenshot](documentation/validation/screenshot-logout.png) | |
+| band_listing | signup.html | ![screenshot](documentation/validation/screenshot-signup.png) | |
+
+Please note that the signup.html page has a known bug that is caused by allauth.  It will also be noted below in a dedicated bug section.
 
 ### CSS
 
@@ -64,9 +70,11 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 | band_listing | admin.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/admin.py) | ![screenshot](documentation/validation/screenshot09.png) | |
 | band_listing | context_processors.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/context_processors.py) | ![screenshot](documentation/validation/screenshot10.png) | |
 | band_listing | forms.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/forms.py) | ![screenshot](documentation/validation/screenshot11.png) | |
-| band_listing | models.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/models.py) | ![screenshot](documentation/validation/screenshot12.png) | |
-| band_listing | urls.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/urls.py) | ![screenshot](documentation/validation/screenshot13.png) | |
-| band_listing | views.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/views.py) | ![screenshot](documentation/validation/screenshot14.png) | |
+| band_listing | models.py | [PEP8 CI](https://pep8ci.herokuapp.com/raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/models.py) | ![screenshot](documentation/validation/screenshot12.png) | |
+| band_listing | test_forms.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/tests/test-forms.py) | ![screenshot](documentation/validation/test-forms.png) | |
+| band_listing | test_views.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/tests/test-views.py) | ![screenshot](documentation/validation/test-views.png) | |
+| band_listing | urls.py | [PEP8 CI](https://pep8ci.herokuapp.com/raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/urls.py) | ![screenshot](documentation/validation/screenshot13.png) | |
+| band_listing | views.py | [PEP8 CI](https://pep8ci.herokuapp.com/raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/band_listing/views.py) | ![screenshot](documentation/validation/screenshot14.png) | |
 |  | manage.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/manage.py) | ![screenshot](documentation/validation/screenshot15.png) | |
 | onebigdarkroom | settings.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/onebigdarkroom/settings.py) | ![screenshot](documentation/validation/screenshot16.png) | |
 | onebigdarkroom | urls.py | [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/craigdickerson725/one-big-dark-room/main/onebigdarkroom/urls.py) | ![screenshot](documentation/validation/screenshot17.png) | |
@@ -158,6 +166,13 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Error message should display for empty message body | Submitted form with an empty message body | Error message displayed as expected | Test concluded and passed | ![screenshot](documentation/features/feature12x.png) |
 | Inbox | | | | | |
 | | Inbox should display received messages correctly | Navigated to the inbox | Messages were displayed with correct details | Test concluded and passed | ![screenshot](documentation/features/feature13x.png) |
-| | Unread messages should appear with a dark red background | Checked inbox for unread messages | Unread messages had the correct styling with a dark red background | Test concluded and passed | ![screenshot](documentation/features/feature14x.png) |
+| Bandlisting Details | | | | | |
+| | Bandlisting details page should show all relevant details of the band | Viewed a band listing’s details page | All information (band name, photo, description, and snippet) appeared correctly | Test concluded and passed | ![screenshot](documentation/features/feature15x.png) |
+| | Default image should appear if no band photo is uploaded | Viewed a band listing with no photo | Default placeholder image displayed as expected | Test concluded and passed | ![screenshot](documentation/features/feature16x.png) |
+| Message Details | | | | | |
+| | User should be able to view details of a message | Clicked on a message in the inbox | The message was displayed with all details (sender, recipient, and body) | Test concluded and passed | ![screenshot](documentation/features/feature14x.png) |
+| 404 Error | | | | | |
+| | User should see a custom 404 error page when navigating to a non-existent page | Navigated to a non-existent URL | Custom 404 error page appeared with the correct message | Test concluded and passed | ![screenshot](documentation/features/feature19x.png) |
+| | Custom 404 page should have a link to return to the home page | Checked for the 'Return to Home' link on the 404 page | Link was present and functioned as expected | Test concluded and passed | ![screenshot](documentation/features/feature20x.png) |
 | Logout | | | | | |
-| | User should be logged out and redirected to the login page | Clicked the 'Logout' link | Logout succeeded, and I was redirected to the login page | Test concluded and passed | ![screenshot](documentation/features/feature15x.png) |
+| | User should be logged out and redirected to the login page | Clicked the 'Logout' link | Logout succeeded, and I was redirected to the login page | Test concluded and passed | ![screenshot](documentation/features/feature21x.png) |

@@ -4,6 +4,7 @@ from io import BytesIO
 from PIL import Image
 from ..forms import BandListingForm, MessageForm
 
+
 # Create your tests here.
 class BandListingFormTest(TestCase):
 
@@ -12,9 +13,9 @@ class BandListingFormTest(TestCase):
         image = BytesIO()
         Image.new('RGB', (100, 100)).save(image, format='JPEG')
         image.seek(0)
-        
-        photo = SimpleUploadedFile(name='test_image.jpg', content=image.getvalue(), content_type='image/jpeg')
-        
+
+        photo = SimpleUploadedFile(name='test_image.jpg', content=image.getvalue(), content_type='image/jpeg')  # noqa
+
         form_data = {
             'band_name': 'Test Band',
             'photo': photo,
@@ -22,7 +23,8 @@ class BandListingFormTest(TestCase):
             'snippet': 'Post-punk band from New York, New York',
         }
         form = BandListingForm(data=form_data, files={'photo': photo})
-        self.assertTrue(form.is_valid())  # Form should be valid with a valid photo
+        # Form should be valid with a valid photo
+        self.assertTrue(form.is_valid())
 
     def test_bandlisting_with_photo(self):
         # Create an image in memory for the test
@@ -30,22 +32,23 @@ class BandListingFormTest(TestCase):
         Image.new('RGB', (100, 100)).save(image, format='JPEG')
         image.seek(0)
 
-        photo = SimpleUploadedFile(name='test_image.jpg', content=image.getvalue(), content_type='image/jpeg')
+        photo = SimpleUploadedFile(name='test_image.jpg', content=image.getvalue(), content_type='image/jpeg')   # noqa
 
         form_data = {
             'band_name': 'Band With Photo',
             'description': 'A description',
             'snippet': '',  # Optional snippet
         }
-        
+
         # Include the photo in the files dictionary
         form = BandListingForm(data=form_data, files={'photo': photo})
-        
+
         # Check if the form is valid and print errors if not
         if not form.is_valid():
             print(form.errors)  # Print the errors to diagnose the issue
 
-        self.assertTrue(form.is_valid())  # Form should be valid with an optional photo
+        # Form should be valid with an optional photo
+        self.assertTrue(form.is_valid())
 
     def test_invalid_bandlisting_form_no_band_name(self):
         # Test case where 'band_name' is missing (invalid)
@@ -56,7 +59,8 @@ class BandListingFormTest(TestCase):
         }
         form = BandListingForm(data=form_data)
         self.assertFalse(form.is_valid())  # Form should be invalid
-        self.assertIn('band_name', form.errors)  # Error should be related to 'band_name'
+        # Error should be related to 'band_name'
+        self.assertIn('band_name', form.errors)
 
     def test_invalid_bandlisting_form_no_snippet(self):
         # Test case where 'snippet' is optional
@@ -66,7 +70,8 @@ class BandListingFormTest(TestCase):
             'snippet': '',  # Optional snippet
         }
         form = BandListingForm(data=form_data)
-        self.assertTrue(form.is_valid())  # Form should be valid with optional snippet
+        # Form should be valid with optional snippet
+        self.assertTrue(form.is_valid())
 
 
 class MessageFormTest(TestCase):
@@ -86,7 +91,8 @@ class MessageFormTest(TestCase):
         }
         form = MessageForm(data=form_data)
         self.assertFalse(form.is_valid())  # Form should be invalid
-        self.assertIn('message_body', form.errors)  # Error should be related to 'message_body'
+        # Error should be related to 'message_body'
+        self.assertIn('message_body', form.errors)
 
     def test_message_form_with_long_message(self):
         # Test case with a very long message (valid)
@@ -95,4 +101,5 @@ class MessageFormTest(TestCase):
             'message_body': long_message,
         }
         form = MessageForm(data=form_data)
-        self.assertTrue(form.is_valid())  # Form should be valid even with a long message
+        # Form should be valid even with a long message
+        self.assertTrue(form.is_valid())
