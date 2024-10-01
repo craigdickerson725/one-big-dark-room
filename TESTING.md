@@ -1,6 +1,8 @@
+# Testing
+
 In this section, I aim to demonstrate that comprehensive testing has been conducted throughout the development of One Big Dark Room. The goal is to ensure that the website operates as expected, providing a seamless experience for all users while achieving its intended functionality.
 
-To this end, each feature has been thoroughly tested to confirm that it works as intended. This includes feature-by-feature testing, user experience testing, compatibility checks, and performance assessments. I have carefully evaluated the project to ensure it delivers an easy and intuitive way for users to achieve their goals.
+To this end, each feature has been tested to confirm that it works as intended. This includes feature-by-feature testing, user experience testing, compatibility checks, and performance assessments. I have carefully evaluated the project to ensure it delivers an easy and intuitive way for users to achieve their goals.
 
 - Feature-by-Feature Testing: Each feature of the site has been individually tested to confirm that it performs as expected.
 
@@ -18,7 +20,7 @@ To this end, each feature has been thoroughly tested to confirm that it works as
     - Accessibility Testing: Testing was conducted to ensure the site complies with accessibility standards, including screen reader compatibility, proper use of alt text for images, and effective keyboard navigation.
 
 - Compatibility Testing
-    - Browser Compatibility: The website has been tested across popular web browsers such as Chrome, Firefox, Safari, and Edge to ensure consistent performance.
+    - Browser Compatibility: The website has been tested across popular web browsers such as Chrome, Firefox, and Edge to ensure consistent performance.
 
     - Device Compatibility: Functionality was tested across multiple devices, including desktops, laptops, tablets, and smartphones, to ensure that the site works properly on all platforms.
 
@@ -199,51 +201,82 @@ I have conducted a series of automated tests on my application.
 
 I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
 
-### Python (Unit Testing)
+### Form Tests
 
-I have used Django's built-in unit testing framework to test the application functionality.
+#### Overview
+Form testing ensures that user inputs are validated and processed correctly. In this project, I tested the forms to verify that data is appropriately validated before submission.
 
-In order to run the tests, I ran the following command in the terminal:
+The tests were written using **Django's test framework**, which provides tools for checking form behavior, field validation, and error handling.
 
-`python3 manage.py test band_listing`
+#### Band Listing Form
 
-To create the coverage report, I would then run the following commands:
+- **Test Case: Valid Data Submission**
+  - **Description:** Tests if the form accepts valid data for all required fields (`band_name`, `snippet`, etc.).
+  - **Expected Outcome:** The form should be valid, and a new band listing should be created upon submission.
+  - **Actual Outcome:** The form was valid, and the listing was successfully created.
 
-`pip3 install coverage`
+- **Test Case: Missing Required Fields**
+  - **Description:** Tests the form's validation when required fields are left blank.
+  - **Expected Outcome:** The form should return errors for the missing fields.
+  - **Actual Outcome:** Validation errors were correctly displayed for missing fields.
 
-`pip3 freeze --local > requirements.txt`
+#### Message Form
 
-`coverage run --omit=*/site-packages/*,*/migrations/*,*/__init__.py,env.py manage.py test`
+- **Test Case: Valid Data Submission**
+  - **Description:** Ensures that the form accepts valid data for the message body and recipient.
+  - **Expected Outcome:** The form should be valid, and the message should be sent.
+  - **Actual Outcome:** The form was successfully submitted, and the message was sent as expected.
 
-`coverage report`
+- **Test Case: Empty Message Body**
+  - **Description:** Tests form validation when the message body is empty.
+  - **Expected Outcome:** The form should be invalid, with an error message for the missing body.
+  - **Actual Outcome:** The form returned the expected validation error.
 
-To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
+---
 
-`coverage html`
+### View Tests
 
-`python3 -m http.server`
+#### Overview
+View testing ensures that the application's pages render correctly and that the expected data is returned to the user. I used **Django's test client** to simulate GET and POST requests, verifying that the correct views were called, and the right templates were rendered.
 
-Below are the results from the various apps on my application that I've tested:
+#### Band Listing Views
 
-| App/Folder | File | Coverage | Screenshot |
-| --- | --- | --- | --- |
-| band_listing | admin.py  | 95% | ![screenshot](documentation/tests/py-test01.png) |
-| band_listing | apps.py | 100% | ![screenshot](documentation/tests/py-test02.png) |
-| band_listing | context_processors.py | 100% | ![screenshot](documentation/tests/py-test03.png) |
-| band_listing | forms.py | 100% | ![screenshot](documentation/tests/py-test04.png) |
-| band_listing | models.py | 86% | ![screenshot](documentation/tests/py-test05.png) |
-| band_listing | tests/test_forms.py | 98% | ![screenshot](documentation/tests/py-test06.png) |
-| band_listing | tests/test_views.py | 100% | ![screenshot](documentation/tests/py-test07.png) |
-| band_listing | urls.py | 100% | ![screenshot](documentation/tests/py-test08.png) |
-| band_listing | views.py | 70% | ![screenshot](documentation/tests/py-test09.png) |
-|              | manage.py | 82% | ![screenshot](documentation/tests/py-test10.png) |
-| onebigdarkroom | settings.py | 100% | ![screenshot](documentation/tests/py-test11.png) |
-| onebigdarkroom | urls.py | 100% | ![screenshot](documentation/tests/py-test12.png) |
-| onebigdarkroom | views.py | 67% | ![screenshot](documentation/tests/py-test13.png) |
+- **Test Case: Listing Page Renders Successfully**
+  - **Description:** Checks if the band listing page loads correctly.
+  - **Expected Outcome:** The page should return a 200 status code and render the correct template (`band_listing.html`).
+  - **Actual Outcome:** The page loaded successfully with a 200 status code and rendered the correct template.
 
-#### Unit Test Issues
+- **Test Case: Band Detail Page**
+  - **Description:** Tests whether the detail page for a specific band listing renders properly when accessed by its slug.
+  - **Expected Outcome:** The page should return a 200 status code and render the `band_detail.html` template.
+  - **Actual Outcome:** The page was rendered correctly, and the expected content was displayed.
 
-While I  made plenty of syntax errors writing the unit tests, they were all resolved by catching my own small coding errors.  In the end, all of the tests passed repeatedly, so no issues in terms of actual testing were discovered.
+#### Message Views
+
+- **Test Case: Inbox Renders Successfully**
+  - **Description:** Ensures that the inbox page for the logged-in user is accessible and displays messages.
+  - **Expected Outcome:** The inbox should load with a 200 status code and list any available messages.
+  - **Actual Outcome:** The inbox page rendered successfully, displaying the correct messages for the logged-in user.
+
+- **Test Case: Message Deletion**
+  - **Description:** Tests whether a message can be successfully deleted.
+  - **Expected Outcome:** The message should be flagged as deleted and no longer appear in the inbox or outbox.
+  - **Actual Outcome:** The message was marked as deleted and was no longer visible in either the inbox or outbox.
+
+---
+
+#### How to Run the Tests
+
+To run the form and view tests using Django's test framework, use the following command:
+
+```bash
+python3 manage.py test
+```
+#### My Results
+
+The screenshot below shows the passing results of the automated tests for testing the views and testing the forms:
+
+![screenshot](documentation/automated_testing.png)
 
 ## Bugs
 
