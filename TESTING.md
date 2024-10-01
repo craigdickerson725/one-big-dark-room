@@ -319,13 +319,13 @@ coverage html
 ```
 This opens a detailed report of which lines of code were executed during testing.
 
-![screenshot](documentation/automated_testing.png)
+![screenshot](documentation/coverage_report.png)
 
 ## Bugs
 
 The only known bug with the application is a well-known error caused by the allauth authentication system in Django, which appears on the Sign Up page.  This was caught in the validation process, and confirmed to me by my mentor, Tim Nelson.
 
-![screenshot](documentation/coverage_report.png)
+![screenshot](documentation/validation/screenshot-signup.png)
 
 ## Unfixed Bugs
 
