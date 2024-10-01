@@ -278,11 +278,54 @@ The screenshot below shows the passing results of the automated tests for testin
 
 ![screenshot](documentation/automated_testing.png)
 
+### Test Coverage
+
+#### Overview
+Test coverage was measured using **coverage.py** to ensure that key parts of the application are tested. This helps identify areas of the code that still need testing and verifies that the majority of the project is being covered by the test suite.
+
+#### Coverage Results
+After running the test suite, the overall coverage percentage was:
+
+**87%**
+
+Here is a breakdown of the coverage for different parts of the project:
+
+| File                                | Statements | Missed | Coverage |
+|-------------------------------------|------------|--------|----------|
+| `band_listing/admin.py`             | 20         | 1      | 95%      |
+| `band_listing/apps.py`              | 4          | 0      | 100%     |
+| `band_listing/context_processors.py`| 6          | 0      | 100%     |
+| `band_listing/forms.py`             | 26         | 0      | 100%     |
+| `band_listing/models.py`            | 43         | 6      | 86%      |
+| `band_listing/tests/test_forms.py`  | 48         | 1      | 98%      |
+| `band_listing/tests/test_views.py`  | 52         | 0      | 100%     |
+| `band_listing/urls.py`              | 4          | 0      | 100%     |
+| `band_listing/views.py`             | 141        | 42     | 70%      |
+| `manage.py`                         | 11         | 2      | 82%      |
+| `onebigdarkroom/settings.py`        | 37         | 0      | 100%     |
+| `onebigdarkroom/urls.py`            | 5          | 0      | 100%     |
+| `onebigdarkroom/views.py`           | 3          | 1      | 67%      |
+| **TOTAL**                           | 400        | 53     | **87%**  |
+
+To generate the coverage report, the following command was used:
+
+```bash
+coverage run --omit=*/site-packages/*,*/migrations/*,*/__init__.py,env.py manage.py test
+```
+The HTML coverage report can be generated and viewed with:
+
+```bash
+coverage html
+```
+This opens a detailed report of which lines of code were executed during testing.
+
+![screenshot](documentation/automated_testing.png)
+
 ## Bugs
 
 The only known bug with the application is a well-known error caused by the allauth authentication system in Django, which appears on the Sign Up page.  This was caught in the validation process, and confirmed to me by my mentor, Tim Nelson.
 
-![screenshot](documentation/validation/screenshot-signup.png)
+![screenshot](documentation/coverage_report.png)
 
 ## Unfixed Bugs
 
